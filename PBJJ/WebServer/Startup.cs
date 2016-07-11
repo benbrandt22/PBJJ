@@ -10,7 +10,7 @@ namespace PBJJ.WebServer
 {
     public static class Startup
     {
-        public async static Task Start() {
+        public static async Task Start() {
             var httpServer = new HttpServer(80);
 
             httpServer.RegisterRoute(new StaticFileRouteHandler(@"WebContent"));
