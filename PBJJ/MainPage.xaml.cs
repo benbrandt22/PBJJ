@@ -26,5 +26,10 @@ namespace PBJJ
         {
             this.InitializeComponent();
         }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await WebServer.Startup.Start();
+        }
     }
 }
