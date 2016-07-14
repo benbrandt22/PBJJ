@@ -27,7 +27,6 @@ namespace PBJJ.Core
         }
 
         public bool ProgramRunning { get; }
-        public int MotorStepsPerInch { get; set; }
         public double KerfWidthInches { get; set; }
 
     }
