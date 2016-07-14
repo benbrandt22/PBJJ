@@ -22,20 +22,20 @@ namespace PBJJ.Core
             {
                 // forward
                 directionMultiplier = 1;
-                GpioConfiguration.StepperDirectionPin.Write(GpioPinValue.High);
+                GpioConnections.StepperDirectionPin.Write(GpioPinValue.High);
             }
             else
             {
                 // reverse
                 directionMultiplier = -1;
-                GpioConfiguration.StepperDirectionPin.Write(GpioPinValue.Low);
+                GpioConnections.StepperDirectionPin.Write(GpioPinValue.Low);
             }
 
             for (int i = 0; i < Math.Abs(steps); i++)
             {
                 // motor steps for every low-to-high transition
-                GpioConfiguration.StepperStepPin.Write(GpioPinValue.Low);
-                GpioConfiguration.StepperStepPin.Write(GpioPinValue.High);
+                GpioConnections.StepperStepPin.Write(GpioPinValue.Low);
+                GpioConnections.StepperStepPin.Write(GpioPinValue.High);
                 Task.Delay(1).Wait(1);
                 progress.Report(directionMultiplier*(i + 1));
             }

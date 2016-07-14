@@ -97,7 +97,7 @@
     </Compile>
     <Compile Include="Core\Carriage.cs" />
     <Compile Include="Core\CarriageStepperMotor.cs" />
-    <Compile Include="Core\GpioConfiguration.cs" />
+    <Compile Include="Core\GpioConnections.cs" />
     <Compile Include="Core\PBJJAppStatusViewModel.cs" />
     <Compile Include="Core\ProgrammableBoxJointJigApp.cs" />
     <Compile Include="Core\StatusProvider.cs" />
