@@ -95,6 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Carriage.cs" />
+    <Compile Include="Core\CarriageStepperMotor.cs" />
     <Compile Include="Core\GpioConfiguration.cs" />
     <Compile Include="Core\PBJJAppStatusViewModel.cs" />
     <Compile Include="Core\ProgrammableBoxJointJigApp.cs" />

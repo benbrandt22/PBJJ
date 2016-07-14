@@ -14,7 +14,8 @@ namespace PBJJ.Core
 
             return new PbjjAppStatusViewModel()
             {
-                ProgramRunning = app.ProgramRunning
+                ProgramRunning = app.ProgramRunning,
+                CurrentPositionInches = app.Carriage.CurrentPositionInches,
             };
         }
     }

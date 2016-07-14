@@ -9,5 +9,6 @@ namespace PBJJ.Core
     public class PbjjAppStatusViewModel
     {
         public bool ProgramRunning { get; set; }
+        public double CurrentPositionInches { get; set; }
     }
 }
