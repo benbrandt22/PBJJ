@@ -28,26 +28,10 @@ namespace PBJJ.Core
         {
             // private constructor to ensure single instance in static "Instance" field
             Carriage = new Carriage();
-
-            RunTest();
-
         }
         
         public bool ProgramRunning { get; }
         public double KerfWidthInches { get; set; }
-
-
-
-
         
-        private async void RunTest()
-        {
-            await Task.Delay(1000);
-            Carriage.MoveToPosition(0.5);
-            await Task.Delay(1000);
-            Carriage.MoveToPosition(1);
-            await Task.Delay(1000);
-            Carriage.MoveToPosition(0);
-        }
     }
 }
