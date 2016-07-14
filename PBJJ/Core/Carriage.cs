@@ -31,11 +31,18 @@ namespace PBJJ.Core
 
         public double CurrentPositionInches => StepsToInches(_currentPositionSteps);
 
-        public void MoveToPosition(double inches)
+        public async Task MoveToPosition(double inches)
         {
             int targetStepPosition = InchesToSteps(inches);
             int deltaSteps = (targetStepPosition - _currentPositionSteps);
-            _motor.MoveSteps(deltaSteps);
+
+            int positionBeforeMove = _currentPositionSteps;
+            var moveProgress = new Progress<int>(stepsMoved => {
+                _currentPositionSteps = (positionBeforeMove + stepsMoved);
+            });
+
+            await Task.Run(() => { _motor.MoveSteps(deltaSteps, moveProgress); });
+            
             _currentPositionSteps = targetStepPosition;
         }
 
