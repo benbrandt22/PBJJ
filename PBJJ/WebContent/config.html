@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <script src="angular.min.js"></script>
+    <script src="config.js"></script>
+    <meta charset="utf-8" />
+    <title>PBJJ</title>
+</head>
+<body>
+    <div ng-controller="ConfigController as configCtrl">
+
+        <h2>PBJJ Configuration</h2>
+
+        <p>
+            Kerf Width (inches):
+            <input type="number" step="0.001" ng-model="configCtrl.config.KerfWidthInches" />
+        </p>
+
+        <p>
+            <button type="button" ng-click="configCtrl.saveConfig()">Save</button>
+            <button type="button" ng-click="configCtrl.cancel()">Cancel</button>
+        </p>
+
+    </div>
+</body>
+</html>

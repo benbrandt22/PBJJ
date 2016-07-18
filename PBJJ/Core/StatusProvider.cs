@@ -16,6 +16,7 @@ namespace PBJJ.Core
             {
                 ProgramRunning = app.ProgramRunning,
                 CurrentPositionInches = app.Carriage.CurrentPositionInches,
+                KerfWidthInches = app.KerfWidthInches,
             };
         }
     }

@@ -10,5 +10,6 @@ namespace PBJJ.Core
     {
         public bool ProgramRunning { get; set; }
         public double CurrentPositionInches { get; set; }
+        public double KerfWidthInches { get; set; }
     }
 }

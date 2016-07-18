@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Devkoes.Restup.WebServer.Attributes;
 using Devkoes.Restup.WebServer.Models.Schemas;
+using Devkoes.Restup.WebServer.Rest.Models.Contracts;
 using PBJJ.Core;
 
 namespace PBJJ.WebServer
@@ -17,6 +18,20 @@ namespace PBJJ.WebServer
         {
             return new GetResponse(GetResponse.ResponseStatus.OK, StatusProvider.GetCurrentStatus());
         }
-        
+
+        [UriFormat("/config")]
+        public GetResponse GetApplicationConfiguration()
+        {
+            return new GetResponse(GetResponse.ResponseStatus.OK, ConfigProvider.GetConfiguration());
+        }
+
+        [UriFormat("/saveConfig")]
+        public IPostResponse SaveApplicationConfiguration([FromContent] PbjjConfigViewModel configViewModel)
+        {
+            ProgrammableBoxJointJigApp.Instance.KerfWidthInches = configViewModel.KerfWidthInches;
+
+            return new PostResponse(PostResponse.ResponseStatus.Created,"index.html");
+        }
+
     }
 }

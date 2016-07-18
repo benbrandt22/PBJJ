@@ -99,7 +99,9 @@
     <Compile Include="Core\CarriageStepperMotor.cs" />
     <Compile Include="Core\GpioConnections.cs" />
     <Compile Include="Core\PBJJAppStatusViewModel.cs" />
+    <Compile Include="Core\PbjjConfigViewModel.cs" />
     <Compile Include="Core\ProgrammableBoxJointJigApp.cs" />
+    <Compile Include="Core\ConfigProvider.cs" />
     <Compile Include="Core\StatusProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -126,7 +128,13 @@
     <Content Include="WebContent\angular.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="WebContent\config.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="WebContent\app.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebContent\config.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WebContent\index.html">
