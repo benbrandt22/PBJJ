@@ -16,6 +16,9 @@ namespace PBJJ.Core
         public Carriage Carriage;
         private double _kerfWidthInches;
         private LimitSwitch _onTableLimitSwitch;
+        private LedLight RedLight;
+        private LedLight GreenLight;
+
         private ApplicationDataContainer LocalSettings { get; set; }
 
         public static ProgrammableBoxJointJigApp Instance {
@@ -34,6 +37,9 @@ namespace PBJJ.Core
             // private constructor to ensure single instance in static "Instance" field
             Carriage = new Carriage();
             _onTableLimitSwitch = new LimitSwitch(GpioConnections.OnTableLimitSwitchPin);
+            RedLight = new LedLight(GpioConnections.RedLightGpioPin);
+            GreenLight = new LedLight(GpioConnections.GreenLightGpioPin);
+
             LocalSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             Profile = ProfileGenerator.GenerateStandardProfile(0.25, 6);
             CutProgram = new CutProgram();

@@ -23,6 +23,9 @@ namespace PBJJ.Core
 
         public static GpioPin OnTableLimitSwitchPin;
 
+        public static GpioPin RedLightGpioPin;
+        public static GpioPin GreenLightGpioPin;
+
         static GpioConnections()
         {
             // static constructor initializes pins only once the first time they are called for.
@@ -39,6 +42,9 @@ namespace PBJJ.Core
 
             CarriageHomeLimitSwitchPin = InitializeInput(19);
             OnTableLimitSwitchPin = InitializeInput(26);
+
+            RedLightGpioPin = InitializeOutput(20);
+            GreenLightGpioPin = InitializeOutput(21);
         }
 
         private static GpioPin InitializeOutput(int gpioPinNumber)
