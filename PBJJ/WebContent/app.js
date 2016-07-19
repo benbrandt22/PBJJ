@@ -15,6 +15,10 @@
             });
     };
 
+    home.reHome = function() {
+        $http.post("/api/rehome");
+    };
+
 
     // start the first status update
     home.updateStatus();

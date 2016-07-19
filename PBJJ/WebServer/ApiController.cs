@@ -33,5 +33,12 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created,"index.html");
         }
 
+        [UriFormat("/rehome")]
+        public IPostResponse ReHome()
+        {
+            Task.Run(ProgrammableBoxJointJigApp.Instance.Carriage.ReHome);
+            return new PostResponse(PostResponse.ResponseStatus.Created, "");
+        }
+
     }
 }
