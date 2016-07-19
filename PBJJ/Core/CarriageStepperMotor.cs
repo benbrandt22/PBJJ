@@ -13,7 +13,7 @@ namespace PBJJ.Core
         /// Moves the stepper by the specified number of steps.
         /// Negative values go in reverse direction.
         /// </summary>
-        public void MoveSteps(int steps, IProgress<int> progress)
+        public async Task MoveSteps(int steps, IProgress<int> progress)
         {
             if (steps == 0) { return; }
             int directionMultiplier;
@@ -36,8 +36,8 @@ namespace PBJJ.Core
                 // motor steps for every low-to-high transition
                 GpioConnections.StepperStepPin.Write(GpioPinValue.Low);
                 GpioConnections.StepperStepPin.Write(GpioPinValue.High);
-                Task.Delay(1).Wait(1);
-                progress.Report(directionMultiplier*(i + 1));
+                await Task.Delay(1);
+                progress?.Report(directionMultiplier*(i + 1));
             }
         }
     }

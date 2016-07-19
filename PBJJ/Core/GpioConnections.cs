@@ -17,6 +17,8 @@ namespace PBJJ.Core
         public static GpioPin StepperDirectionPin;
         public static GpioPin StepperStepPin;
 
+        public static GpioPin CarriageHomeLimitSwitchPin;
+
         static GpioConnections()
         {
             // static constructor initializes pins only once the first time they are called for.
@@ -33,6 +35,12 @@ namespace PBJJ.Core
             StepperStepPin = gpio.OpenPin(13);
             StepperStepPin.SetDriveMode(GpioPinDriveMode.Output);
 
+            CarriageHomeLimitSwitchPin = gpio.OpenPin(19);
+            CarriageHomeLimitSwitchPin.SetDriveMode(
+                CarriageHomeLimitSwitchPin.IsDriveModeSupported(GpioPinDriveMode.InputPullUp)
+                    ? GpioPinDriveMode.InputPullUp
+                    : GpioPinDriveMode.Input);
+            CarriageHomeLimitSwitchPin.DebounceTimeout = TimeSpan.FromMilliseconds(50);
         }
     }
 }

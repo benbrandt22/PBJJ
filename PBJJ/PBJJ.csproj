@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Carriage.cs" />
+    <Compile Include="Core\LimitSwitch.cs" />
     <Compile Include="Core\CarriageStepperMotor.cs" />
     <Compile Include="Core\CutProgram.cs" />
     <Compile Include="Core\JointProfile.cs" />

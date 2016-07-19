@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,13 @@ namespace PBJJ.Core
         private double _stepsPerInch;
         private int _currentPositionSteps;
         private CarriageStepperMotor _motor;
+        private LimitSwitch _homeLimitSwitch;
 
         public Carriage()
         {
             InitStepsPerInch();
             this._motor = new CarriageStepperMotor();
+            this._homeLimitSwitch = new LimitSwitch(GpioConnections.CarriageHomeLimitSwitchPin);
         }
         
         private void InitStepsPerInch()
@@ -41,11 +44,39 @@ namespace PBJJ.Core
                 _currentPositionSteps = (positionBeforeMove + stepsMoved);
             });
 
-            await Task.Run(() => { _motor.MoveSteps(deltaSteps, moveProgress); });
+            await _motor.MoveSteps(deltaSteps, moveProgress);
             
             _currentPositionSteps = targetStepPosition;
         }
 
+        public async Task ReHome()
+        {
+            while (_homeLimitSwitch.IsPressed())
+            {
+                // move away from switch first in case we're already on it
+                await _motor.MoveSteps(1, null);
+            }
+
+            await Task.Delay(TimeSpan.FromSeconds(0.5));
+
+            // move on to switch until it engages
+            while (_homeLimitSwitch.IsNotPressed())
+            {
+                // move toward home switch
+                await _motor.MoveSteps(-1, null);
+            }
+
+            await Task.Delay(TimeSpan.FromSeconds(0.5));
+
+            // switch is now pressed, back off until it's not pressed
+            while (_homeLimitSwitch.IsPressed())
+            {
+                await _motor.MoveSteps(1, null);
+            }
+
+            // set our zero point
+            _currentPositionSteps = 0;
+        }
 
     }
 }
