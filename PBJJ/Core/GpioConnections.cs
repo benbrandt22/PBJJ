@@ -14,6 +14,8 @@ namespace PBJJ.Core
     /// </summary>
     public static class GpioConnections
     {
+        private static GpioController gpioController;
+
         public static GpioPin StepperDirectionPin;
         public static GpioPin StepperStepPin;
 
@@ -27,20 +29,31 @@ namespace PBJJ.Core
 
         private static void InitializeGpio()
         {
-            var gpio = GpioController.GetDefault();
+            gpioController = GpioController.GetDefault();
 
-            StepperDirectionPin = gpio.OpenPin(5);
-            StepperDirectionPin.SetDriveMode(GpioPinDriveMode.Output);
+            StepperDirectionPin = InitializeOutput(5);
 
-            StepperStepPin = gpio.OpenPin(13);
-            StepperStepPin.SetDriveMode(GpioPinDriveMode.Output);
+            StepperStepPin = InitializeOutput(13);
 
-            CarriageHomeLimitSwitchPin = gpio.OpenPin(19);
-            CarriageHomeLimitSwitchPin.SetDriveMode(
-                CarriageHomeLimitSwitchPin.IsDriveModeSupported(GpioPinDriveMode.InputPullUp)
+            CarriageHomeLimitSwitchPin = InitializeInput(19);
+        }
+
+        private static GpioPin InitializeOutput(int gpioPinNumber)
+        {
+            var gpioPin = gpioController.OpenPin(gpioPinNumber);
+            gpioPin.SetDriveMode(GpioPinDriveMode.Output);
+            return gpioPin;
+        }
+
+        private static GpioPin InitializeInput(int gpioPinNumber)
+        {
+            var gpioPin = gpioController.OpenPin(gpioPinNumber);
+            gpioPin.SetDriveMode(
+                gpioPin.IsDriveModeSupported(GpioPinDriveMode.InputPullUp)
                     ? GpioPinDriveMode.InputPullUp
                     : GpioPinDriveMode.Input);
-            CarriageHomeLimitSwitchPin.DebounceTimeout = TimeSpan.FromMilliseconds(50);
+            gpioPin.DebounceTimeout = TimeSpan.FromMilliseconds(50);
+            return gpioPin;
         }
     }
 }
