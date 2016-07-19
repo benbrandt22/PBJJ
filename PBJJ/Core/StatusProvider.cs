@@ -15,6 +15,7 @@ namespace PBJJ.Core
             return new PbjjAppStatusViewModel()
             {
                 ProgramRunning = app.ProgramRunning,
+                OnTable = app.OnTable,
                 CurrentPositionInches = app.Carriage.CurrentPositionInches,
                 KerfWidthInches = app.KerfWidthInches,
                 Profile = app.Profile,

@@ -9,6 +9,7 @@ namespace PBJJ.Core
     public class PbjjAppStatusViewModel
     {
         public bool ProgramRunning { get; set; }
+        public bool OnTable { get; set; }
         public double CurrentPositionInches { get; set; }
         public double KerfWidthInches { get; set; }
         public JointProfile Profile { get; set; }
