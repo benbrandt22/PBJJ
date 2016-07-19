@@ -40,8 +40,6 @@ namespace PBJJ.Core
             this._kerfWidthInches = (double?) LocalSettings.Values["kerfWidthInches"] ?? 0.125d;
 
             CutProgram.GenerateFromProfileElements(Profile.Elements, KerfWidthInches);
-
-            Task.Run(Carriage.ReHome);
         }
 
         public JointProfile Profile { get; set; }
