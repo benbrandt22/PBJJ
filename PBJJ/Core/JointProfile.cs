@@ -15,10 +15,14 @@ namespace PBJJ.Core
             Name = name;
             Elements = new List<JointProfileElement>();
         }
+        
+        public List<JointProfileElement> Elements { get; }
 
-        public List<JointProfileElement> Elements { get; set; }
+        public List<JointProfileElement> ReverseElements {
+            get { return Elements.Select(e => e.Reverse()).ToList(); }
+        }
     }
-
+    
     public class JointProfileElement
     {
         public JointProfileElement(JointProfileElementType type, double width)
