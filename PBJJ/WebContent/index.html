@@ -20,7 +20,10 @@
 
         <p><strong>Kerf Width:</strong> {{home.status.KerfWidthInches | number : 3}} in</p>
 
-        <p><strong>Profile:</strong> {{home.status.Profile.Name}}</p>
+        <p>
+            <div><strong>Profile:</strong> {{home.status.Profile.Name}}</div>
+            <div>Profile Mode: {{home.status.UsePrimaryProfile ? 'Primary' : 'Reverse'}}</div>
+        </p>
 
         <p>
             <button type="button" ng-click="home.reHome()"
@@ -28,6 +31,15 @@
         </p>
 
         <hr/>
+
+        <p>
+            <button type="button" ng-click="home.runProgram()">
+                Run Program
+            </button>
+        </p>
+
+        <hr/>
+
         <p>
             <a href="config.html">Edit Configuration</a>
         </p>

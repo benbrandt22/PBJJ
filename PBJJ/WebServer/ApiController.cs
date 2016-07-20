@@ -40,5 +40,12 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created, "");
         }
 
+        [UriFormat("/runProgram")]
+        public IPostResponse RunProgram()
+        {
+            Task.Run(ProgrammableBoxJointJigApp.Instance.RunProgram);
+            return new PostResponse(PostResponse.ResponseStatus.Created, "");
+        }
+
     }
 }

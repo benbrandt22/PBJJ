@@ -13,5 +13,6 @@ namespace PBJJ.Core
         public double CurrentPositionInches { get; set; }
         public double KerfWidthInches { get; set; }
         public JointProfile Profile { get; set; }
+        public bool UsePrimaryProfile { get; set; }
     }
 }

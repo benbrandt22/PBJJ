@@ -19,6 +19,10 @@
         $http.post("/api/rehome");
     };
 
+    home.runProgram = function () {
+        $http.post("/api/runProgram");
+    };
+
 
     // start the first status update
     home.updateStatus();

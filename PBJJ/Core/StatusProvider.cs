@@ -19,6 +19,7 @@ namespace PBJJ.Core
                 CurrentPositionInches = app.Carriage.CurrentPositionInches,
                 KerfWidthInches = app.KerfWidthInches,
                 Profile = app.Profile,
+                UsePrimaryProfile = app.UsePrimaryProfile,
             };
         }
     }
