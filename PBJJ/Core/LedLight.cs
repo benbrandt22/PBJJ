@@ -39,6 +39,11 @@ namespace PBJJ.Core
         }
 
         public void StartBlinking(TimeSpan period) {
+            if (period <= TimeSpan.Zero)
+            {
+                TurnOn();
+                return;
+            }
             blinkTimer.Change(TimeSpan.Zero, period);
         }
 
