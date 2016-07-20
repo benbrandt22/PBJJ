@@ -8,14 +8,14 @@ namespace PBJJ.Core
 {
     public class CutProgram
     {
-        public CutProgram()
+        public CutProgram(List<JointProfileElement> elements, double kerfWidth)
         {
-            CutPositions = new List<double>();
+            GenerateFromProfileElements(elements, kerfWidth);
         }
 
         public List<double> CutPositions { get; set; }
 
-        public void GenerateFromProfileElements(List<JointProfileElement> elements, double kerfWidth)
+        private void GenerateFromProfileElements(List<JointProfileElement> elements, double kerfWidth)
         {
             // work out the positions of each slot, and where they start and end
             var slotStartsAndEnds = new List<Tuple<double,double>>();

@@ -42,12 +42,9 @@ namespace PBJJ.Core
 
             LocalSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             Profile = ProfileGenerator.GenerateStandardProfile(0.25, 6);
-            CutProgram = new CutProgram();
             
-
             this._kerfWidthInches = (double?) LocalSettings.Values["kerfWidthInches"] ?? 0.125d;
-
-            CutProgram.GenerateFromProfileElements(Profile.Elements, KerfWidthInches);
+            
         }
 
         public JointProfile Profile { get; set; }
