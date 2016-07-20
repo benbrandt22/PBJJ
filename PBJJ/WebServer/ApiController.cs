@@ -36,7 +36,7 @@ namespace PBJJ.WebServer
         [UriFormat("/rehome")]
         public IPostResponse ReHome()
         {
-            Task.Run(ProgrammableBoxJointJigApp.Instance.Carriage.ReHome);
+            Task.Run(ProgrammableBoxJointJigApp.Instance.ReHome);
             return new PostResponse(PostResponse.ResponseStatus.Created, "");
         }
 

@@ -65,6 +65,13 @@ namespace PBJJ.Core
             }
         }
 
+        public async Task ReHome()
+        {
+            RedLight.StartBlinking();
+            await Task.Run(Carriage.ReHome);
+            RedLight.TurnOff();
+        }
+
         public async Task RunProgram()
         {
             ProgramRunning = true;
