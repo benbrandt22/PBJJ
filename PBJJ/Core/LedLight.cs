@@ -11,13 +11,15 @@ namespace PBJJ.Core
     public class LedLight
     {
         private readonly GpioPin _outputPin;
+        private readonly TimeSpan _defaultBlinkPeriod;
         private GpioPinValue pinValue;
         private readonly Timer blinkTimer;
         
-        public LedLight(GpioPin outputPin)
+        public LedLight(GpioPin outputPin, int defaultBlinkPeriodMs = 250)
         {
             _outputPin = outputPin;
-            blinkTimer = new Timer(BlinkTimerTick, null, Timeout.InfiniteTimeSpan, TimeSpan.FromSeconds(1));
+            _defaultBlinkPeriod = TimeSpan.FromMilliseconds(defaultBlinkPeriodMs);
+            blinkTimer = new Timer(BlinkTimerTick, null, Timeout.InfiniteTimeSpan, _defaultBlinkPeriod);
         }
         
         public void TurnOn() {
@@ -38,6 +40,11 @@ namespace PBJJ.Core
             _outputPin.Write(pinValue);
         }
 
+        public void StartBlinking()
+        {
+            StartBlinking(_defaultBlinkPeriod);
+        }
+
         public void StartBlinking(TimeSpan period) {
             if (period <= TimeSpan.Zero)
             {
@@ -49,7 +56,7 @@ namespace PBJJ.Core
 
         private void StopBlinking()
         {
-            blinkTimer.Change(Timeout.InfiniteTimeSpan, TimeSpan.FromSeconds(1));
+            blinkTimer.Change(Timeout.InfiniteTimeSpan, _defaultBlinkPeriod);
         }
 
     }
