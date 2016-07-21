@@ -6,9 +6,54 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    Background="White">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="PropertyNameStyle">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="PropertyValueStyle">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Style="{StaticResource PropertyNameStyle}" Grid.Column="0" Grid.Row="0">
+                Device Name:
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource PropertyValueStyle}" Grid.Column="1" Grid.Row="0" Text="{Binding DeviceName}" />
+
+            <TextBlock Style="{StaticResource PropertyNameStyle}" Grid.Column="0" Grid.Row="1">
+                IP Address:
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource PropertyValueStyle}" Grid.Column="1" Grid.Row="1" Text="{Binding IpAddress}" />
+
+            <TextBlock Style="{StaticResource PropertyValueStyle}" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Margin="0,20,0,0">
+                To operate, open a web browser on this network to:
+                <LineBreak/>
+                http://<Run Text="{Binding IpAddress}" />/
+            </TextBlock>
+
+        </Grid>
 
     </Grid>
 </Page>

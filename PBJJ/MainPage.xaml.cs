@@ -22,14 +22,30 @@ namespace PBJJ
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private MainPageViewModel viewModel;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            this.viewModel = new MainPageViewModel()
+            {
+                DeviceName = DeviceInfo.GetDeviceName(),
+                IpAddress = DeviceInfo.GetCurrentIpv4Address()
+            };
+
+            this.DataContext = viewModel;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await WebServer.Startup.Start();
+        }
+
+        public class MainPageViewModel
+        {
+            public string DeviceName { get; set; }
+            public string IpAddress { get; set; }
         }
     }
 }
