@@ -45,12 +45,16 @@ namespace PBJJ.Core
             UsePrimaryProfile = true;
             
             this._kerfWidthInches = (double?) LocalSettings.Values["kerfWidthInches"] ?? 0.125d;
-            
         }
 
         public JointProfile Profile { get; set; }
         public bool UsePrimaryProfile { get; set; }
         public CutProgram CutProgram { get; set; }
+        public string StatusMessage { get; set; }
+
+        private void Status(string message) {
+            StatusMessage = message;
+        }
 
         public bool ProgramRunning { get; private set; }
         public bool OnTable => _onTableLimitSwitch.IsPressed();
@@ -67,9 +71,11 @@ namespace PBJJ.Core
 
         public async Task ReHome()
         {
+            Status("Returning to Home position...");
             RedLight.StartBlinking();
             await Task.Run(Carriage.ReHome);
             RedLight.TurnOff();
+            Status("");
         }
 
         public async Task RunProgram()
@@ -77,28 +83,49 @@ namespace PBJJ.Core
             ProgramRunning = true;
             CutProgram = new CutProgram(UsePrimaryProfile ? Profile.Elements : Profile.ReverseElements, KerfWidthInches);
             // make sure we're off the table
-            while (OnTable) { await Task.Delay(100); }
+            while (OnTable) {
+                Status("Waiting: Pull back off the blade");
+                await Task.Delay(100);
+            }
 
             // get back to zero if not already
-            while (OnTable) { await Task.Delay(100); }
+            while (OnTable) {
+                Status("Waiting: Pull back off the blade");
+                await Task.Delay(100);
+            }
+            Status("Moving to the Home position");
             RedLight.StartBlinking();
             await Carriage.MoveToPosition(0);
             RedLight.TurnOff();
 
+            int cutCounter = 1;
             foreach (var cutPosition in CutProgram.CutPositions)
             {
-                while (OnTable) { await Task.Delay(100); }
+                while (OnTable) {
+                    Status("Waiting: Pull back off the blade");
+                    await Task.Delay(100);
+                }
+                Status($"Moving to the next cut ({cutCounter} of {CutProgram.CutPositions.Count})");
                 RedLight.StartBlinking();
                 await Carriage.MoveToPosition(cutPosition);
                 RedLight.TurnOff();
 
+                Status($"Ready for cut #{cutCounter} of {CutProgram.CutPositions.Count}");
                 await MakeTheCut();
+
+                cutCounter++;
             }
 
-            while (OnTable) { await Task.Delay(100); }
+            while (OnTable) {
+                Status("Waiting: Pull back off the blade");
+                await Task.Delay(100);
+            }
+            Status("Moving to the Home position");
             RedLight.StartBlinking();
             await Carriage.MoveToPosition(0);
             RedLight.TurnOff();
+
+            Status("");
 
             ProgramRunning = false;
         }
@@ -112,7 +139,10 @@ namespace PBJJ.Core
             while (!OnTable) { await Task.Delay(500); }
             // now we just moved onto the table
             // wait until we get off the table
-            while (OnTable) { await Task.Delay(500); }
+            while (OnTable) {
+                Status("Cutting");
+                await Task.Delay(500);
+            }
 
             GreenLight.TurnOff();
         }

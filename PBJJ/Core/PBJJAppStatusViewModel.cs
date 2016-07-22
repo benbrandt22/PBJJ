@@ -15,5 +15,6 @@ namespace PBJJ.Core
         public bool UsePrimaryProfile { get; set; }
         public string ProfileName { get; set; }
         public List<JointProfileElement> ProfileElements { get; set; }
+        public string StatusMessage { get; set; }
     }
 }

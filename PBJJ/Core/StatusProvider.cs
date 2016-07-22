@@ -21,6 +21,7 @@ namespace PBJJ.Core
                 ProfileName = $"{app.Profile.Name}{(app.UsePrimaryProfile ? "" : " (Reverse)")}",
                 ProfileElements = (app.UsePrimaryProfile ? app.Profile.Elements : app.Profile.ReverseElements),
                 UsePrimaryProfile = app.UsePrimaryProfile,
+                StatusMessage = app.StatusMessage,
             };
         }
     }
