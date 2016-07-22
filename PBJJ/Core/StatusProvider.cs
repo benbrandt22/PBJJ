@@ -18,7 +18,8 @@ namespace PBJJ.Core
                 OnTable = app.OnTable,
                 CurrentPositionInches = app.Carriage.CurrentPositionInches,
                 KerfWidthInches = app.KerfWidthInches,
-                Profile = app.Profile,
+                ProfileName = $"{app.Profile.Name}{(app.UsePrimaryProfile ? "" : " (Reverse)")}",
+                ProfileElements = (app.UsePrimaryProfile ? app.Profile.Elements : app.Profile.ReverseElements),
                 UsePrimaryProfile = app.UsePrimaryProfile,
             };
         }

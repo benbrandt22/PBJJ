@@ -116,5 +116,10 @@ namespace PBJJ.Core
 
             GreenLight.TurnOff();
         }
+
+        public void ToggleProfileMode()
+        {
+            UsePrimaryProfile = !UsePrimaryProfile;
+        }
     }
 }

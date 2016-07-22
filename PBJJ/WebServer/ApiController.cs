@@ -40,6 +40,13 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created, "");
         }
 
+        [UriFormat("/toggleProfileMode")]
+        public IPostResponse ToggleProfileMode()
+        {
+            ProgrammableBoxJointJigApp.Instance.ToggleProfileMode();
+            return new PostResponse(PostResponse.ResponseStatus.Created, "");
+        }
+
         [UriFormat("/runProgram")]
         public IPostResponse RunProgram()
         {

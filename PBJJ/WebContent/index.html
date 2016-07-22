@@ -31,8 +31,11 @@
         <p><strong>Kerf Width:</strong> {{home.status.KerfWidthInches | number : 3}} in</p>
 
         <p>
-            <div><strong>Profile:</strong> {{home.status.Profile.Name}}</div>
-            <div>Profile Mode: {{home.status.UsePrimaryProfile ? 'Primary' : 'Reverse'}}</div>
+            <div><strong>Profile:</strong> {{home.status.ProfileName}}</div>
+            <div>
+                Profile Mode: {{home.status.UsePrimaryProfile ? 'Primary' : 'Reverse'}}
+                <button ng-click="home.toggleProfileMode()">Switch Profile Mode</button>
+            </div>
         </p>
 
         <p>

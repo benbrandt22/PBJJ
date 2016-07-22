@@ -7,7 +7,7 @@
         $http.get("/api/status").then(
             function (response) {
                 home.status = response.data;
-                home.boxes = home.getDrawingBoxes(home.status.Profile.Elements);
+                home.boxes = home.getDrawingBoxes(home.status.ProfileElements);
                 $timeout(home.updateStatus, home.refreshIntervalMs);
             },
             function(error) {
@@ -20,15 +20,19 @@
         $http.post("/api/rehome");
     };
 
+    home.toggleProfileMode = function () {
+        $http.post("/api/toggleProfileMode");
+    };
+
     home.runProgram = function () {
         $http.post("/api/runProgram");
     };
 
     home.getTotalWidth = function(){
         var total = 0;
-        var totalElements = home.status.Profile.Elements.length;
+        var totalElements = home.status.ProfileElements.length;
         for (var i = 0; i < totalElements; i++) {
-            var e = home.status.Profile.Elements[i];
+            var e = home.status.ProfileElements[i];
             total += e.Width;
         }
         return total;
