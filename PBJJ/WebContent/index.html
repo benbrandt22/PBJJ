@@ -12,6 +12,16 @@
 
         <h2>PBJJ Web UI</h2>
 
+        <svg id="boxJointVis" width="20em" height="5em" ng-attr-view_box="{{home.drawingViewBox()}}" style="border: 1px solid blue;">
+            <rect ng-repeat="box in home.boxes" fill="#2980b9"
+                  ng-attr-x="{{box.x}}" ng-attr-y="{{box.y}}" ng-attr-width="{{box.width}}" ng-attr-height="{{box.height}}" />
+            <rect fill="#2980b9" x="0" y="0" height="0.25" ng-attr-width="{{home.getTotalWidth()}}"/>
+
+            <rect fill="#707070" stroke="#3A3A3A" stroke-width="0.02"
+                  ng-attr-x="{{home.status.CurrentPositionInches - home.status.KerfWidthInches}}"
+                  y="0.25" height="0.75" ng-attr-width="{{home.status.KerfWidthInches}}" />
+        </svg>
+
         <p><strong>Program Running:</strong> {{home.status.ProgramRunning}}</p>
 
         <p><strong>On Table:</strong> {{home.status.OnTable}}</p>
