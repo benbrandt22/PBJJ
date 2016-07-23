@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,18 @@ namespace PBJJ.Core
 {
     public class CarriageStepperMotor
     {
+        private readonly Stopwatch _sw;
+
+        public CarriageStepperMotor()
+        {
+            this._sw = new System.Diagnostics.Stopwatch();
+        }
+
         /// <summary>
         /// Moves the stepper by the specified number of steps.
         /// Negative values go in reverse direction.
         /// </summary>
-        public async Task MoveSteps(int steps, IProgress<int> progress)
+        public void MoveSteps(int steps, IProgress<int> progress, double stepPeriodMilliseconds = 1)
         {
             if (steps == 0) { return; }
             int directionMultiplier;
@@ -33,12 +41,17 @@ namespace PBJJ.Core
 
             for (int i = 0; i < Math.Abs(steps); i++)
             {
-                // motor steps for every low-to-high transition
+                // easydriver steps for every low-to-high transition
                 GpioConnections.StepperStepPin.Write(GpioPinValue.Low);
                 GpioConnections.StepperStepPin.Write(GpioPinValue.High);
-                await Task.Delay(1);
-                progress?.Report(directionMultiplier*(i + 1));
+
+                _sw.Start();
+                while ((_sw.Elapsed).TotalMilliseconds < stepPeriodMilliseconds) { }
+                _sw.Reset();
+
+                progress?.Report(directionMultiplier * (i + 1));
             }
         }
+
     }
 }

@@ -20,7 +20,7 @@ namespace PBJJ.Core
             this._motor = new CarriageStepperMotor();
             this._homeLimitSwitch = new LimitSwitch(GpioConnections.CarriageHomeLimitSwitchPin);
         }
-        
+
         private void InitStepsPerInch()
         {
             double inchesPerRevolution = (8d/25.4d); // lead screw is 8mm per revolution
@@ -44,7 +44,7 @@ namespace PBJJ.Core
                 _currentPositionSteps = (positionBeforeMove + stepsMoved);
             });
 
-            await _motor.MoveSteps(deltaSteps, moveProgress);
+            _motor.MoveSteps(deltaSteps, moveProgress);
             
             _currentPositionSteps = targetStepPosition;
         }
@@ -54,7 +54,7 @@ namespace PBJJ.Core
             while (_homeLimitSwitch.IsPressed())
             {
                 // move away from switch first in case we're already on it
-                await _motor.MoveSteps(1, null);
+                _motor.MoveSteps(1, null);
             }
 
             await Task.Delay(TimeSpan.FromSeconds(0.5));
@@ -63,15 +63,15 @@ namespace PBJJ.Core
             while (_homeLimitSwitch.IsNotPressed())
             {
                 // move toward home switch
-                await _motor.MoveSteps(-1, null);
+                _motor.MoveSteps(-1, null);
             }
 
             await Task.Delay(TimeSpan.FromSeconds(0.5));
 
-            // switch is now pressed, back off until it's not pressed
+            // switch is now pressed, back off slowly until it's not pressed
             while (_homeLimitSwitch.IsPressed())
             {
-                await _motor.MoveSteps(1, null);
+                _motor.MoveSteps(1, null, 5);
             }
 
             // set our zero point
