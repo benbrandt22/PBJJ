@@ -104,6 +104,7 @@
     <Compile Include="Core\GpioConnections.cs" />
     <Compile Include="Core\PBJJAppStatusViewModel.cs" />
     <Compile Include="Core\PbjjConfigViewModel.cs" />
+    <Compile Include="Core\ProfileManager.cs" />
     <Compile Include="Core\ProfileGenerator.cs" />
     <Compile Include="Core\ProgrammableBoxJointJigApp.cs" />
     <Compile Include="Core\ConfigProvider.cs" />
@@ -132,6 +133,12 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="WebContent\angular.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebContent\profiles.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebContent\profiles.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WebContent\config.js">

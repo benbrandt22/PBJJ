@@ -54,5 +54,11 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created, "");
         }
 
+        [UriFormat("/profiles")]
+        public GetResponse GetProfiles()
+        {
+            return new GetResponse(GetResponse.ResponseStatus.OK, ProfileManager.GetProfiles());
+        }
+
     }
 }

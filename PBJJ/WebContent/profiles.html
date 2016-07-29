@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <script src="angular.min.js"></script>
+    <script src="profiles.js"></script>
+    <meta charset="utf-8" />
+    <title>Profiles</title>
+</head>
+<body>
+    <div ng-controller="ProfilesController as profilesCtrl">
+
+        <h2>PBJJ Profiles</h2>
+
+        <div ng-repeat="profileName in profilesCtrl.profileNames">
+            {{profileName}}
+        </div>
+
+    </div>
+</body>
+</html>
