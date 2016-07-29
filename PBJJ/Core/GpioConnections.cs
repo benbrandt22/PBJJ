@@ -36,15 +36,17 @@ namespace PBJJ.Core
         {
             gpioController = GpioController.GetDefault();
 
-            StepperDirectionPin = InitializeOutput(5);
+            // stepper driver control
+            StepperDirectionPin = InitializeOutput(27);
+            StepperStepPin = InitializeOutput(22);
 
-            StepperStepPin = InitializeOutput(13);
-
+            // switch inputs
             CarriageHomeLimitSwitchPin = InitializeInput(19);
-            OnTableLimitSwitchPin = InitializeInput(26);
+            OnTableLimitSwitchPin = InitializeInput(21);
 
-            RedLightGpioPin = InitializeOutput(20);
-            GreenLightGpioPin = InitializeOutput(21);
+            // output LEDs
+            RedLightGpioPin = InitializeOutput(4);
+            GreenLightGpioPin = InitializeOutput(18);
         }
 
         private static GpioPin InitializeOutput(int gpioPinNumber)
