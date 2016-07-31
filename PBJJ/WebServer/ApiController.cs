@@ -60,5 +60,12 @@ namespace PBJJ.WebServer
             return new GetResponse(GetResponse.ResponseStatus.OK, ProfileManager.GetProfiles());
         }
 
+        [UriFormat("/createNew")]
+        public IPostResponse CreateNewProfile([FromContent] NewProfileViewModel newProfileViewModel) {
+            ProfileManager.CreateNewProfile(newProfileViewModel);
+
+            return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
+        }
+
     }
 }

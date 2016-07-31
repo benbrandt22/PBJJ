@@ -10,7 +10,7 @@ namespace PBJJ.Core
     {
         public static JointProfile GenerateStandardProfile(double fingerWidthInches, double overallWidthInches)
         {
-            string name = $"Standard {fingerWidthInches:N3}\" fingers over {overallWidthInches}\"";
+            string name = $"Standard {fingerWidthInches:N3}in fingers over {overallWidthInches}in";
 
             var profile = new JointProfile(name);
 

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <script src="angular.min.js"></script>
+    <script src="new.js"></script>
+    <meta charset="utf-8" />
+    <title>New Profile</title>
+</head>
+<body>
+    <div ng-controller="NewProfileController as newCtrl">
+
+        <h2>New Profile</h2>
+
+        <table>
+            <tr>
+                <td>Type:</td>
+                <td>
+                    <select ng-model="newCtrl.type">
+                        <option value="Standard">Standard</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tbody ng-if="newCtrl.type == 'Standard'">
+            <tr>
+                <td colspan="2">
+                    Standard box joints with fingers and slots of equal width.
+                </td>
+            </tr>
+            <tr>
+                <td>Finger Width:</td>
+                <td><input type="number" step="0.001" ng-model="newCtrl.fingerWidth"/> in</td>
+            </tr>
+                <tr>
+                    <td>Overall Width:</td>
+                    <td><input type="number" step="0.001" ng-model="newCtrl.overallWidth" /> in</td>
+                </tr>
+            </tbody>
+
+            <tbody ng-if="newCtrl.type == 'Custom'">
+            <tr>
+                <td colspan="2">
+                    Custom box joint profile.
+                </td>
+            </tr>
+                <tr>
+                    <td colspan="2">
+                        (Not yet implemented.)
+                    </td>
+                </tr>
+            </tbody>
+
+            <tr>
+                <td></td>
+                <td>
+                    <button type="button" ng-disabled="newCtrl.okToSubmit() == false" ng-click="newCtrl.submitNew()">Create</button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>
