@@ -3,17 +3,6 @@
 
     newCtrl.type = "Standard";
 
-    //profilesCtrl.loadProfiles = function () {
-    //    $http.get("/api/profiles").then(
-    //        function (response) {
-    //            console.log(response.data);
-    //            profilesCtrl.profileNames = response.data.Result.ProfileNames;
-    //        },
-    //        function(error) {
-    //            console.log(error);
-    //        });
-    //};
-
     newCtrl.okToSubmit = function () {
 
         if (newCtrl.type === 'Standard') {
