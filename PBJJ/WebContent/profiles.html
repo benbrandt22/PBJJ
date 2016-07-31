@@ -17,7 +17,12 @@
         </div>
 
         <div ng-repeat="profileName in profilesCtrl.profileNames">
-            {{profileName}}
+            <div>
+                {{profileName}}
+            </div>
+            <div>
+                <button type="button" ng-click="profilesCtrl.loadProfile(profileName)">Load</button>
+            </div>
         </div>
 
     </div>

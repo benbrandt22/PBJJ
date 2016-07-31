@@ -102,6 +102,7 @@
     <Compile Include="Core\CutProgram.cs" />
     <Compile Include="Core\JointProfile.cs" />
     <Compile Include="Core\GpioConnections.cs" />
+    <Compile Include="Core\LoadProfileViewModel.cs" />
     <Compile Include="Core\NewProfileViewModel.cs" />
     <Compile Include="Core\PBJJAppStatusViewModel.cs" />
     <Compile Include="Core\PbjjConfigViewModel.cs" />

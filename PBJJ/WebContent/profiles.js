@@ -11,6 +11,15 @@
                 console.log(error);
             });
     };
+
+    profilesCtrl.loadProfile = function (name) {
+        var data = { name: name };
+        $http.post("/api/loadProfile", data).then(
+            function (response) {
+                $window.location.href = '/index.html';
+            },
+            function (error) { console.log(error); });
+    };
     
     profilesCtrl.loadProfiles();
 });

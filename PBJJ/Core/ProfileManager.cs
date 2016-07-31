@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using System.Text.RegularExpressions;
 
 namespace PBJJ.Core
 {
@@ -70,6 +71,31 @@ namespace PBJJ.Core
         private static string ElementsToFileData(List<JointProfileElement> elements) {
             var lines = elements.Select(e => $"{e.Type.ToString()[0]} {e.Width:N3}");
             return string.Join("\r\n", lines);
+        }
+
+        private static List<JointProfileElement> FileDataToElements(string data) {
+            var elements = new List<JointProfileElement>();
+            var lines = data.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines) {
+                if (Regex.IsMatch(line, @"(S|F) \d(\.\d{1,3})?")) {
+                    var type = line[0] == 'F'
+                        ? JointProfileElement.JointProfileElementType.Finger
+                        : JointProfileElement.JointProfileElementType.Slot;
+                    var width = double.Parse(line.Substring(2));
+                    var jpe = new JointProfileElement(type, width);
+                    elements.Add(jpe);
+                }
+            }
+            return elements;
+        }
+
+        public static async void LoadProfileByName(string name) {
+            var fileData = await ReadFile(name);
+            var jointElements = FileDataToElements(fileData);
+            var jointProfile = new JointProfile(name);
+            jointProfile.Elements.AddRange(jointElements);
+
+            ProgrammableBoxJointJigApp.Instance.Profile = jointProfile;
         }
     }
 

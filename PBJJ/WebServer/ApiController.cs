@@ -67,5 +67,13 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
         }
 
+        [UriFormat("/loadProfile")]
+        public IPostResponse LoadProfile([FromContent] LoadProfileViewModel loadProfileViewModel)
+        {
+            ProfileManager.LoadProfileByName(loadProfileViewModel.Name);
+
+            return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
+        }
+
     }
 }
