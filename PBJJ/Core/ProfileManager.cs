@@ -82,8 +82,9 @@ namespace PBJJ.Core
             var elements = new List<JointProfileElement>();
             var lines = data.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
             foreach (var line in lines) {
-                if (Regex.IsMatch(line, @"(S|F) \d(\.\d{1,3})?")) {
-                    var type = line[0] == 'F'
+                if (Regex.IsMatch(line, @"(s|S|f|F) \d(\.\d{1,3})?")) {
+                    var firstChar = line[0].ToString();
+                    var type = firstChar.ToLower() == "f"
                         ? JointProfileElement.JointProfileElementType.Finger
                         : JointProfileElement.JointProfileElementType.Slot;
                     var width = double.Parse(line.Substring(2));
