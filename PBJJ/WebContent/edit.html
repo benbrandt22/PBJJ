@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <script src="angular.min.js"></script>
+    <script src="edit.js"></script>
+    <meta charset="utf-8" />
+    <title>Edit Profile</title>
+</head>
+<body>
+    <div ng-controller="EditProfileController as editCtrl">
+
+        <h2>Edit Profile</h2>
+
+        <table>
+            <tr>
+                <td>{{editCtrl.name}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea rows="10" cols="20" style="width: 100%" ng-model="editCtrl.data"></textarea>
+                    <p>
+                        One finger or slot is defined on each line, starting with the left side.
+                        A line starting with "F" is a finger, and "S" is a slot.
+                        Following the F or S is a space, and then the width of the finger or slot (in inches).
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" ng-click="editCtrl.save()">Save</button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>

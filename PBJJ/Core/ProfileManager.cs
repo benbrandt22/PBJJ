@@ -17,7 +17,7 @@ namespace PBJJ.Core
             }
         }
 
-        private static async Task SaveFile(string fileName, string content) {
+        public static async Task SaveFile(string fileName, string content) {
             // replace bad characters
             fileName = RemoveBadFileNameChars(fileName);
 
@@ -58,12 +58,17 @@ namespace PBJJ.Core
             if (newProfileViewModel.Type == "Standard") {
                 var newProfile = ProfileGenerator.GenerateStandardProfile(newProfileViewModel.FingerWidth, newProfileViewModel.OverallWidth);
                 await SaveProfile(newProfile);
+                return;
             }
-            
+            if (newProfileViewModel.Type == "Custom") {
+                var newProfile = new JointProfile(newProfileViewModel.Name);
+                await SaveProfile(newProfile);
+                return;
+            }
         }
 
         private static async Task SaveProfile(JointProfile jointProfile) {
-            var filename = $"{jointProfile.Name}.bjp";
+            var filename = $"{jointProfile.Name}{(jointProfile.Name.EndsWith(".bjp") ? "" : ".bjp")}";
             var content = ElementsToFileData(jointProfile.Elements);
             await SaveFile(filename, content);
         }
@@ -97,6 +102,21 @@ namespace PBJJ.Core
 
             ProgrammableBoxJointJigApp.Instance.Profile = jointProfile;
         }
+
+        public static async Task<ProfileDataModel> GetProfileData(string fileName) {
+            fileName = fileName + (fileName.EndsWith(".bjp") ? "" : ".bjp");
+            var data = await ReadFile(fileName);
+            return new ProfileDataModel() {
+                FileName = fileName,
+                FileData = data
+            };
+        }
+        
+    }
+
+    public class ProfileDataModel {
+        public string FileName { get; set; }
+        public string FileData { get; set; }
     }
 
     public class ProfilesViewModel {

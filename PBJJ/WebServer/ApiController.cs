@@ -75,5 +75,17 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
         }
 
+        [UriFormat("/getProfileData/{fileName}")]
+        public GetResponse GetProfileData(string fileName) {
+            fileName = Uri.UnescapeDataString(fileName);
+            return new GetResponse(GetResponse.ResponseStatus.OK, ProfileManager.GetProfileData(fileName));
+        }
+
+        [UriFormat("/save")]
+        public async Task<IPostResponse> SaveProfile([FromContent] SaveProfileViewModel saveProfileViewModel) {
+            await ProfileManager.SaveFile(saveProfileViewModel.Name, saveProfileViewModel.Data);
+            return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
+        }
+
     }
 }

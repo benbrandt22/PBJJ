@@ -1,7 +1,8 @@
 ﻿angular.module('app', []).controller('NewProfileController', function ($window, $http) {
     var newCtrl = this;
 
-    newCtrl.type = "Standard";
+    newCtrl.type = 'Standard';
+    newCtrl.name = '';
 
     newCtrl.okToSubmit = function () {
 
@@ -12,7 +13,7 @@
         }
 
         if (newCtrl.type === 'Custom') {
-            return false;
+            return (newCtrl.name.length > 0);
         }
 
         return false;
@@ -24,12 +25,17 @@
         }
         var data = {
             type: newCtrl.type,
+            name: newCtrl.name,
             fingerWidth: newCtrl.fingerWidth,
             overallWidth: newCtrl.overallWidth,
         };
         $http.post("/api/createNew", data).then(
             function (response) {
-                $window.location.href = '/profiles.html';
+                var redirectUrl = '/profiles.html';
+                if (newCtrl.type === 'Custom') {
+                    redirectUrl = ('/edit.html?file=' + encodeURIComponent(data.name));
+                }
+                $window.location.href = redirectUrl;
             },
             function (error) { console.log(error); });
     }

@@ -20,6 +20,10 @@
             },
             function (error) { console.log(error); });
     };
+
+    profilesCtrl.editProfile = function (name) {
+        $window.location.href = ('/edit.html?file=' + encodeURIComponent(name));
+    };
     
     profilesCtrl.loadProfiles();
 });

@@ -110,6 +110,7 @@
     <Compile Include="Core\ProfileGenerator.cs" />
     <Compile Include="Core\ProgrammableBoxJointJigApp.cs" />
     <Compile Include="Core\ConfigProvider.cs" />
+    <Compile Include="Core\SaveProfileViewModel.cs" />
     <Compile Include="Core\StatusProvider.cs" />
     <Compile Include="DeviceInfo.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -135,6 +136,12 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="WebContent\angular.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebContent\edit.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebContent\edit.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WebContent\new.html">

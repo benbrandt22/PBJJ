@@ -24,15 +24,15 @@
             </tr>
 
             <tbody ng-if="newCtrl.type == 'Standard'">
-            <tr>
-                <td colspan="2">
-                    Standard box joints with fingers and slots of equal width.
-                </td>
-            </tr>
-            <tr>
-                <td>Finger Width:</td>
-                <td><input type="number" step="0.001" ng-model="newCtrl.fingerWidth"/> in</td>
-            </tr>
+                <tr>
+                    <td colspan="2">
+                        Standard box joints with fingers and slots of equal width.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Finger Width:</td>
+                    <td><input type="number" step="0.001" ng-model="newCtrl.fingerWidth" /> in</td>
+                </tr>
                 <tr>
                     <td>Overall Width:</td>
                     <td><input type="number" step="0.001" ng-model="newCtrl.overallWidth" /> in</td>
@@ -40,14 +40,16 @@
             </tbody>
 
             <tbody ng-if="newCtrl.type == 'Custom'">
-            <tr>
-                <td colspan="2">
-                    Custom box joint profile.
-                </td>
-            </tr>
                 <tr>
                     <td colspan="2">
-                        (Not yet implemented.)
+                        Custom box joint profile. Give the new profile a name below to create the new file,
+                        and the profile can be edited on the next screen.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>
+                        <input type="text" maxlength="255" ng-model="newCtrl.name"/>
                     </td>
                 </tr>
             </tbody>
