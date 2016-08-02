@@ -117,6 +117,11 @@ namespace PBJJ.Core
             var file = await ProfilesFolder.GetFileAsync(oldName);
             await file.RenameAsync(newName, NameCollisionOption.FailIfExists);
         }
+
+        public static async Task DeleteFile(string name) {
+            var file = await ProfilesFolder.GetFileAsync(name);
+            await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
+        }
     }
 
     public class ProfileDataModel {

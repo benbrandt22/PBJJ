@@ -30,6 +30,15 @@
             function (error) { console.log(error); });
     };
 
+    profilesCtrl.deleteProfile = function (name) {
+        var data = { name: name };
+        $http.post("/api/delete", data).then(
+            function (response) {
+                profilesCtrl.loadProfiles();
+            },
+            function (error) { console.log(error); });
+    };
+
     profilesCtrl.editProfile = function (name) {
         $window.location.href = ('/edit.html?file=' + encodeURIComponent(name));
     };

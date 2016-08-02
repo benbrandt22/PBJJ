@@ -94,5 +94,12 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
         }
 
+        [UriFormat("/delete")]
+        public async Task<IPostResponse> DeleteProfile([FromContent] DeleteViewModel deleteViewModel)
+        {
+            await ProfileManager.DeleteFile(deleteViewModel.Name);
+            return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
+        }
+
     }
 }
