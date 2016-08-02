@@ -110,6 +110,7 @@
     <Compile Include="Core\ProfileGenerator.cs" />
     <Compile Include="Core\ProgrammableBoxJointJigApp.cs" />
     <Compile Include="Core\ConfigProvider.cs" />
+    <Compile Include="Core\RenameViewModel.cs" />
     <Compile Include="Core\SaveProfileViewModel.cs" />
     <Compile Include="Core\StatusProvider.cs" />
     <Compile Include="DeviceInfo.cs" />

@@ -112,7 +112,11 @@ namespace PBJJ.Core
                 FileData = data
             };
         }
-        
+
+        public static async Task RenameFile(string oldName, string newName) {
+            var file = await ProfilesFolder.GetFileAsync(oldName);
+            await file.RenameAsync(newName, NameCollisionOption.FailIfExists);
+        }
     }
 
     public class ProfileDataModel {

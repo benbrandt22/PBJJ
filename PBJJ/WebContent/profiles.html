@@ -16,13 +16,19 @@
             <a href="new.html">New Profile...</a>
         </div>
 
-        <div ng-repeat="profileName in profilesCtrl.profileNames">
+        <div ng-repeat="profile in profilesCtrl.profiles">
             <div>
-                {{profileName}}
+                <span ng-if="!profile.isRenaming">{{profile.name}}</span>
+                <span ng-if="profile.isRenaming">
+                    <input type="text" ng-model="profile.newName"/>
+                    <button type="button" ng-click="profilesCtrl.rename(profile.name, profile.newName)">OK</button>
+                    <button type="button" ng-click="(profile.isRenaming = false)">Cancel</button>
+                </span>
             </div>
             <div>
-                <button type="button" ng-click="profilesCtrl.loadProfile(profileName)">Load</button>
-                <button type="button" ng-click="profilesCtrl.editProfile(profileName)">Edit</button>
+                <button type="button" ng-click="profilesCtrl.loadProfile(profile.name)">Load</button>
+                <button type="button" ng-click="profilesCtrl.editProfile(profile.name)">Edit</button>
+                <button type="button" ng-click="(profile.isRenaming = true)">Rename</button>
             </div>
         </div>
 

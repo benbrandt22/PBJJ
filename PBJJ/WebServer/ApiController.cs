@@ -87,5 +87,12 @@ namespace PBJJ.WebServer
             return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
         }
 
+        [UriFormat("/rename")]
+        public async Task<IPostResponse> RenameProfile([FromContent] RenameViewModel renameViewModel)
+        {
+            await ProfileManager.RenameFile(renameViewModel.OldName, renameViewModel.NewName);
+            return new PostResponse(PostResponse.ResponseStatus.Created, "profiles.html");
+        }
+
     }
 }
