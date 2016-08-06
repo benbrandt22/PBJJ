@@ -12,6 +12,10 @@
             });
     };
 
+    configCtrl.reHome = function () {
+        $http.post("/api/rehome");
+    };
+
     configCtrl.saveConfig = function () {
         $http.post("/api/saveConfig", configCtrl.config).then(
             function(response) {

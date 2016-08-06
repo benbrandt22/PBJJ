@@ -4,23 +4,55 @@
 <head>
     <script src="angular.min.js"></script>
     <script src="config.js"></script>
-    <meta charset="utf-8" />
-    <title>PBJJ</title>
+    <script src="ui-bootstrap-tpls-2.0.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <meta charset="utf-8"/>
+    <title>PBJJ Configuration</title>
 </head>
-<body>
-    <div ng-controller="ConfigController as configCtrl">
 
-        <h2>PBJJ Configuration</h2>
+<body style="padding-top: 65px;">
 
-        <p>
-            Kerf Width (inches):
-            <input type="number" step="0.001" ng-model="configCtrl.config.KerfWidthInches" />
-        </p>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Programmable Box Joint Jig</a>
+            </div>
+        </div>
+    </nav>
 
-        <p>
-            <button type="button" ng-click="configCtrl.saveConfig()">Save</button>
-            <button type="button" ng-click="configCtrl.cancel()">Cancel</button>
-        </p>
+    <div class="container" ng-controller="ConfigController as configCtrl">
+
+        <h2>Configuration</h2>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Settings
+            </div>
+            <div class="panel-body">
+                <p>
+                    Kerf Width (inches):
+                    <input type="number" step="0.001" ng-model="configCtrl.config.KerfWidthInches"/>
+                </p>
+
+                <p>
+                    <button type="button" ng-click="configCtrl.saveConfig()">Save</button>
+                    <button type="button" ng-click="configCtrl.cancel()">Cancel</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Functions
+            </div>
+            <div class="panel-body">
+                <button type="button" ng-click="configCtrl.reHome()" class="btn btn-default"
+                        title="Recalibrate carriage back to home position">
+                    Re-Home
+                </button>
+                Recalibrate carriage back to home position
+            </div>
+        </div>
 
     </div>
 </body>

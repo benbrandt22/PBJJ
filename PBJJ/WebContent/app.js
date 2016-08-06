@@ -16,16 +16,18 @@
             });
     };
 
-    home.reHome = function() {
-        $http.post("/api/rehome");
-    };
-
     home.toggleProfileMode = function () {
         $http.post("/api/toggleProfileMode");
     };
 
     home.runProgram = function () {
         $http.post("/api/runProgram");
+    };
+
+    home.canRunProgram = function () {
+        var a = !home.status.ProgramRunning;
+        var b = !home.status.OnTable;
+        return a && b;
     };
 
     home.getTotalWidth = function(){

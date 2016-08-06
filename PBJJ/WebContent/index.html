@@ -4,60 +4,100 @@
 <head>
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
+    <script src="ui-bootstrap-tpls-2.0.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <meta charset="utf-8" />
     <title>PBJJ</title>
 </head>
-<body>
-    <div ng-controller="HomeController as home">
+<body style="padding-top: 65px;">
 
-        <h2>PBJJ Web UI</h2>
-
-        <svg id="boxJointVis" width="20em" height="5em" ng-attr-view_box="{{home.drawingViewBox()}}" style="border: 1px solid blue;">
-            <rect ng-repeat="box in home.boxes" fill="#2980b9"
-                  ng-attr-x="{{box.x}}" ng-attr-y="{{box.y}}" ng-attr-width="{{box.width}}" ng-attr-height="{{box.height}}" />
-            <rect fill="#2980b9" x="0" y="0" height="0.25" ng-attr-width="{{home.getTotalWidth()}}"/>
-
-            <rect fill="#707070" stroke="#3A3A3A" stroke-width="0.02"
-                  ng-attr-x="{{home.status.CurrentPositionInches - home.status.KerfWidthInches}}"
-                  y="0.25" height="0.75" ng-attr-width="{{home.status.KerfWidthInches}}" />
-        </svg>
-
-        <p><strong>Status:</strong> {{home.status.StatusMessage}}</p>
-
-        <p><strong>Program Running:</strong> {{home.status.ProgramRunning}}</p>
-
-        <p><strong>On Table:</strong> {{home.status.OnTable}}</p>
-
-        <p><strong>Current Position:</strong> {{home.status.CurrentPositionInches | number : 3}} in</p>
-
-        <p><strong>Kerf Width:</strong> {{home.status.KerfWidthInches | number : 3}} in</p>
-
-        <p>
-            <div><strong>Profile:</strong> {{home.status.ProfileName}}</div>
-            <div>
-                Profile Mode: {{home.status.UsePrimaryProfile ? 'Primary' : 'Reverse'}}
-                <button ng-click="home.toggleProfileMode()">Switch Profile Mode</button>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Programmable Box Joint Jig</a>
             </div>
-        </p>
+        </div>
+    </nav>
 
-        <p>
-            <button type="button" ng-click="home.reHome()"
-                    title="Recalibrate carriage back to home position">ReHome</button>
-        </p>
+    <div class="container" ng-controller="HomeController as home">
 
-        <hr/>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="text-muted">Status:</span>
+                {{home.status.StatusMessage}}
+            </div>
+            <div class="panel-body">
+                <svg id="boxJointVis" width="100%" height="5em" ng-attr-view_box="{{home.drawingViewBox()}}">
+                    <rect ng-repeat="box in home.boxes" fill="#2980b9"
+                          ng-attr-x="{{box.x}}" ng-attr-y="{{box.y}}" ng-attr-width="{{box.width}}" ng-attr-height="{{box.height}}"/>
+                    <rect fill="#2980b9" x="0" y="0" height="0.25" ng-attr-width="{{home.getTotalWidth()}}"/>
 
-        <p>
-            <button type="button" ng-click="home.runProgram()">
-                Run Program
-            </button>
-        </p>
+                    <rect fill="#707070" stroke="#3A3A3A" stroke-width="0.02"
+                          ng-attr-x="{{home.status.CurrentPositionInches - home.status.KerfWidthInches}}"
+                          y="0.25" height="0.75" ng-attr-width="{{home.status.KerfWidthInches}}"/>
+                </svg>
 
-        <hr/>
+                <div class="text-muted">
+                    Position: {{home.status.CurrentPositionInches | number : 3}} in
+                    <span class="pull-right">
+                        {{home.status.OnTable ? 'On Table' : 'Off Table'}}
+                    </span>
+                </div>
+                <div class="text-muted">
+                    Kerf: {{home.status.KerfWidthInches | number : 3}} in
+                </div>
+            </div>
+        </div>
 
-        <p>
-            <a href="config.html">Edit Configuration</a>
-        </p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Profile
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-9">{{home.status.ProfileName}}</div>
+                    <div class="col-xs-3 text-right">
+                        <a href="profiles.html" class="btn btn-default btn-sm" ng-disabled="home.status.ProgramRunning">Change...</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>
+                            Mode: {{home.status.UsePrimaryProfile ? 'Primary' : 'Reverse'}}
+                            <button ng-click="home.toggleProfileMode()" ng-disabled="home.status.ProgramRunning" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-random"></span> Switch Mode
+                            </button>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-lg" ng-click="home.runProgram()"
+                                ng-disabled="!home.canRunProgram()">
+                            <span class="glyphicon glyphicon-play"></span>
+                            Start Cutting
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    <a href="config.html">
+                        <span class="glyphicon glyphicon-cog"></span> Configuration
+                    </a>
+                </p>
+                <p>
+                    <a href="profiles.html">
+                        <span class="glyphicon glyphicon-th-list"></span> Profiles
+                    </a>
+                </p>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
