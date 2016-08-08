@@ -4,28 +4,35 @@
 <head>
     <script src="angular.min.js"></script>
     <script src="profiles.js"></script>
+    <script src="ui-bootstrap-tpls-2.0.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <meta charset="utf-8" />
     <title>Profiles</title>
 </head>
-<body>
-    <div ng-controller="ProfilesController as profilesCtrl">
+<body style="padding-top: 65px;">
 
-        <h2>PBJJ Profiles</h2>
-
-        <div>
-            <a href="new.html">New Profile...</a>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Programmable Box Joint Jig</a>
+            </div>
         </div>
+    </nav>
+
+    <div class="container" ng-controller="ProfilesController as profilesCtrl">
+
+        <h2>Profiles</h2>
 
         <div ng-repeat="profile in profilesCtrl.profiles">
-            <div>
+            <div ng-click="profile.isSelected = !profile.isSelected">
                 <span ng-if="!profile.isRenaming">{{profile.name}}</span>
                 <span ng-if="profile.isRenaming">
-                    <input type="text" ng-model="profile.newName"/>
+                    <input type="text" ng-model="profile.newName" />
                     <button type="button" ng-click="profilesCtrl.rename(profile.name, profile.newName)">OK</button>
                     <button type="button" ng-click="(profile.isRenaming = false)">Cancel</button>
                 </span>
             </div>
-            <div>
+            <div ng-if="profile.isSelected">
                 <button type="button" ng-click="profilesCtrl.loadProfile(profile.name)">Load</button>
                 <button type="button" ng-click="profilesCtrl.editProfile(profile.name)">Edit</button>
                 <button type="button" ng-click="(profile.isRenaming = true)">Rename</button>
@@ -37,6 +44,13 @@
                 </div>
             </div>
         </div>
+
+
+        <hr />
+
+        <p>
+            <a href="new.html">New Profile...</a>
+        </p>
 
     </div>
 </body>
