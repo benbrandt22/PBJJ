@@ -42,6 +42,22 @@
     profilesCtrl.editProfile = function (name) {
         $window.location.href = ('/edit.html?file=' + encodeURIComponent(name));
     };
-    
+
+    profilesCtrl.deselectProfiles = function() {
+        angular.forEach(profilesCtrl.profiles, function (value, key) {
+            value.isSelected = false;
+        });
+    };
+
+    profilesCtrl.profileClick = function(index) {
+        var profile = profilesCtrl.profiles[index];
+        if (profile.isSelected && !profile.isDeleting && !profile.isRenaming) {
+            profile.isSelected = false;
+        } else {
+            profilesCtrl.deselectProfiles();
+            profile.isSelected = true;
+        }
+    };
+
     profilesCtrl.loadProfiles();
 });

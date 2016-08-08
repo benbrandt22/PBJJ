@@ -23,24 +23,34 @@
 
         <h2>Profiles</h2>
 
-        <div ng-repeat="profile in profilesCtrl.profiles">
-            <div ng-click="profile.isSelected = !profile.isSelected">
-                <span ng-if="!profile.isRenaming">{{profile.name}}</span>
-                <span ng-if="profile.isRenaming">
-                    <input type="text" ng-model="profile.newName" />
-                    <button type="button" ng-click="profilesCtrl.rename(profile.name, profile.newName)">OK</button>
-                    <button type="button" ng-click="(profile.isRenaming = false)">Cancel</button>
-                </span>
-            </div>
-            <div ng-if="profile.isSelected">
-                <button type="button" ng-click="profilesCtrl.loadProfile(profile.name)">Load</button>
-                <button type="button" ng-click="profilesCtrl.editProfile(profile.name)">Edit</button>
-                <button type="button" ng-click="(profile.isRenaming = true)">Rename</button>
-                <button type="button" ng-click="profile.isDeleting = true">Delete</button>
-                <div ng-if="profile.isDeleting == true">
-                    Confirm Delete?
-                    <button type="button" ng-click="profilesCtrl.deleteProfile(profile.name)">Delete</button>
-                    <button type="button" ng-click="profile.isDeleting = false">Cancel</button>
+        <div ng-repeat="profile in profilesCtrl.profiles" class="well well-sm" style="cursor: pointer;" ng-click="profilesCtrl.profileClick($index)">
+
+            <div class="row">
+                <div class="col-xs-1">
+                    <span class="glyphicon glyphicon-file"></span>
+                </div>
+                <div class="col-xs-11">
+                    <div>
+                        <span ng-if="!profile.isRenaming">{{profile.name}}</span>
+                        <span ng-if="profile.isRenaming" class="form-inline">
+                            <input type="text" ng-model="profile.newName" class="form-control" />
+                            <button type="button" class="btn btn-sm btn-success" ng-click="profilesCtrl.rename(profile.name, profile.newName)">OK</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="(profile.isRenaming = false)">Cancel</button>
+                        </span>
+                    </div>
+                    <div ng-if="profile.isSelected && !profile.isRenaming">
+                        <p>
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="profilesCtrl.loadProfile(profile.name)">Load</button>
+                            <button type="button" class="btn btn-sm btn-info" ng-click="profilesCtrl.editProfile(profile.name)">Edit</button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="(profile.isRenaming = true)">Rename</button>
+                            <button type="button" class="btn btn-sm btn-danger" ng-click="profile.isDeleting = true">Delete</button>
+                        </p>
+                        <p ng-if="profile.isDeleting == true">
+                            Confirm Delete?
+                            <button type="button" class="btn btn-sm btn-danger" ng-click="profilesCtrl.deleteProfile(profile.name)">Delete</button>
+                            <button type="button" class="btn btn-sm btn-info" ng-click="profile.isDeleting = false">Cancel</button>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
