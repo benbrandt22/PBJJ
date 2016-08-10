@@ -4,63 +4,63 @@
 <head>
     <script src="angular.min.js"></script>
     <script src="new.js"></script>
+    <script src="ui-bootstrap-tpls-2.0.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <meta charset="utf-8" />
     <title>New Profile</title>
 </head>
-<body>
-    <div ng-controller="NewProfileController as newCtrl">
+<body style="padding-top: 65px;">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Programmable Box Joint Jig</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" ng-controller="NewProfileController as newCtrl">
 
         <h2>New Profile</h2>
 
-        <table>
-            <tr>
-                <td>Type:</td>
-                <td>
-                    <select ng-model="newCtrl.type">
-                        <option value="Standard">Standard</option>
-                        <option value="Custom">Custom</option>
-                    </select>
-                </td>
-            </tr>
+        <div>
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type" ng-model="newCtrl.type" class="form-control">
+                    <option value="Standard">Standard</option>
+                    <option value="Custom">Custom</option>
+                </select>
+            </div>
+        </div>
 
-            <tbody ng-if="newCtrl.type == 'Standard'">
-                <tr>
-                    <td colspan="2">
-                        Standard box joints with fingers and slots of equal width.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Finger Width:</td>
-                    <td><input type="number" step="0.001" ng-model="newCtrl.fingerWidth" /> in</td>
-                </tr>
-                <tr>
-                    <td>Overall Width:</td>
-                    <td><input type="number" step="0.001" ng-model="newCtrl.overallWidth" /> in</td>
-                </tr>
-            </tbody>
+        <div ng-if="newCtrl.type == 'Standard'">
+            <p>
+                Standard box joints with fingers and slots of equal width.
+            </p>
+            <div class="form-group">
+                <label for="fingerwidth">Finger Width (inches)</label>
+                <input id="fingerwidth" type="number" step="0.001" ng-model="newCtrl.fingerWidth" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="overallwidth">Overall Width (inches)</label>
+                <input id="overallwidth" type="number" step="0.001" ng-model="newCtrl.overallWidth" class="form-control" />
+            </div>
+        </div>
 
-            <tbody ng-if="newCtrl.type == 'Custom'">
-                <tr>
-                    <td colspan="2">
-                        Custom box joint profile. Give the new profile a name below to create the new file,
-                        and the profile can be edited on the next screen.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Name</td>
-                    <td>
-                        <input type="text" maxlength="255" ng-model="newCtrl.name"/>
-                    </td>
-                </tr>
-            </tbody>
+        <div ng-if="newCtrl.type == 'Custom'">
+            <p>
+                Custom box joint profile. Give the new profile a name below to create the new file,
+                and the profile can be edited on the next screen.
+            </p>
+            <div class="form-group">
+                <label for="customname">Name</label>
+                <input id="customname" type="text" maxlength="255" ng-model="newCtrl.name" class="form-control" />
+            </div>
+        </div>
 
-            <tr>
-                <td></td>
-                <td>
-                    <button type="button" ng-disabled="newCtrl.okToSubmit() == false" ng-click="newCtrl.submitNew()">Create</button>
-                </td>
-            </tr>
-        </table>
+        <p>
+            <button type="button" class="btn btn-primary" ng-disabled="newCtrl.okToSubmit() == false" ng-click="newCtrl.submitNew()">Create</button>
+        </p>
 
     </div>
 </body>
