@@ -45,6 +45,16 @@ namespace PBJJ.Core
             UsePrimaryProfile = true;
             
             this._kerfWidthInches = (double?) LocalSettings.Values["kerfWidthInches"] ?? 0.125d;
+
+            Task.Run(ShowReadyIndicator);
+        }
+
+        private async Task ShowReadyIndicator() {
+            RedLight.StartBlinking();
+            GreenLight.StartBlinking();
+            await Task.Delay(3000);
+            RedLight.TurnOff();
+            GreenLight.TurnOff();
         }
 
         public JointProfile Profile { get; set; }

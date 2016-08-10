@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using PBJJ.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -40,6 +41,9 @@ namespace PBJJ
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await WebServer.Startup.Start();
+
+            // "touch" the core app to force it to be created by the static constructor
+            var app = ProgrammableBoxJointJigApp.Instance;
         }
 
         public class MainPageViewModel
