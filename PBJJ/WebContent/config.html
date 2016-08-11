@@ -29,10 +29,11 @@
                 Settings
             </div>
             <div class="panel-body">
-                <p>
-                    Kerf Width (inches):
-                    <input type="number" step="0.001" ng-model="configCtrl.config.KerfWidthInches"/>
-                </p>
+                
+                <div class="form-group">
+                    <label for="kerfwidth">Kerf Width (inches)</label>
+                    <input id="kerfwidth" type="number" step="0.001" ng-model="configCtrl.config.KerfWidthInches" class="form-control" />
+                </div>
 
                 <p>
                     <button type="button" class="btn btn-primary" ng-click="configCtrl.saveConfig()">
