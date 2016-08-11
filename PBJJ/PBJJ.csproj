@@ -203,7 +203,7 @@
     <Content Include="WebContent\config.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="WebContent\app.js">
+    <Content Include="WebContent\home.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WebContent\config.html">
