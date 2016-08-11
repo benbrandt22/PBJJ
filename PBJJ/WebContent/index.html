@@ -66,14 +66,14 @@
                         <p>
                             Mode: {{home.status.UsePrimaryProfile ? 'Primary' : 'Reverse'}}
                             <button ng-click="home.toggleProfileMode()" ng-disabled="home.status.ProgramRunning" class="btn btn-default btn-xs">
-                                <span class="glyphicon glyphicon-random"></span> Switch Mode
+                                <span class="glyphicon glyphicon-random"></span>&nbsp;&nbsp;Switch Mode
                             </button>
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-lg" ng-click="home.runProgram()"
+                        <button type="button" class="btn btn-primary" ng-click="home.runProgram()"
                                 ng-disabled="!home.canRunProgram()">
                             <span class="glyphicon glyphicon-play"></span>
                             Start Cutting

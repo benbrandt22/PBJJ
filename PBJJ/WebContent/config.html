@@ -35,8 +35,12 @@
                 </p>
 
                 <p>
-                    <button type="button" ng-click="configCtrl.saveConfig()">Save</button>
-                    <button type="button" ng-click="configCtrl.cancel()">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="configCtrl.saveConfig()">
+                        <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="configCtrl.cancel()">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel
+                    </button>
                 </p>
             </div>
         </div>
@@ -46,9 +50,9 @@
                 Functions
             </div>
             <div class="panel-body">
-                <button type="button" ng-click="configCtrl.reHome()" class="btn btn-default"
+                <button type="button" ng-click="configCtrl.reHome()" class="btn btn-primary"
                         title="Recalibrate carriage back to home position">
-                    Re-Home
+                    <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Re-Home
                 </button>
                 Recalibrate carriage back to home position
             </div>
