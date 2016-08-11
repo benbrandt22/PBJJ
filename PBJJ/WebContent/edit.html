@@ -4,34 +4,42 @@
 <head>
     <script src="angular.min.js"></script>
     <script src="edit.js"></script>
+    <script src="ui-bootstrap-tpls-2.0.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <meta charset="utf-8" />
     <title>Edit Profile</title>
 </head>
-<body>
-    <div ng-controller="EditProfileController as editCtrl">
+<body style="padding-top: 65px;">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Programmable Box Joint Jig</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" ng-controller="EditProfileController as editCtrl">
 
         <h2>Edit Profile</h2>
 
-        <table>
-            <tr>
-                <td>{{editCtrl.name}}</td>
-            </tr>
-            <tr>
-                <td>
-                    <textarea rows="10" cols="20" style="width: 100%" ng-model="editCtrl.data"></textarea>
-                    <p>
-                        One finger or slot is defined on each line, starting with the left side.
-                        A line starting with "F" is a finger, and "S" is a slot.
-                        Following the F or S is a space, and then the width of the finger or slot (in inches).
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="button" ng-click="editCtrl.save()">Save</button>
-                </td>
-            </tr>
-        </table>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{editCtrl.name}}</h3>
+            </div>
+            <div class="panel-body">
+                <textarea rows="10" cols="20" class="form-control" ng-model="editCtrl.data"></textarea>
+                <p>
+                    One finger or slot is defined on each line, starting with the left side.
+                    A line starting with "F" is a finger, and "S" is a slot.
+                    Following the F or S is a space, and then the width of the finger or slot (in inches).
+                </p>
+            </div>
+        </div>
+
+        <p>
+            <button type="button" class="btn btn-default" ng-click="editCtrl.save()">Save</button>
+        </p>
 
     </div>
 </body>
