@@ -22,6 +22,7 @@ namespace PBJJ.Core
                 ProfileElements = (app.UsePrimaryProfile ? app.Profile.Elements : app.Profile.ReverseElements),
                 UsePrimaryProfile = app.UsePrimaryProfile,
                 StatusMessage = app.StatusMessage,
+                Warnings = app.GetWarnings(),
             };
         }
     }

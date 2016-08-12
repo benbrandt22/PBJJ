@@ -174,5 +174,23 @@ namespace PBJJ.Core
         {
             UsePrimaryProfile = !UsePrimaryProfile;
         }
+
+        public List<string> GetWarnings()
+        {
+            var warnings = new List<string>();
+
+            if (Profile.Elements.Any(e => e.Width < KerfWidthInches))
+            {
+                warnings.Add("Certain elements of this cut profile are narrower than your blade kerf.");
+            }
+
+            var totalProfileWidth = Profile.Elements.Sum(e => e.Width);
+            if (totalProfileWidth > MaxWidthInches)
+            {
+                warnings.Add($"The current profile is wider ({totalProfileWidth:N3} in) than the maximum width of the jig ({MaxWidthInches:N3} in)");
+            }
+
+            return warnings;
+        }
     }
 }

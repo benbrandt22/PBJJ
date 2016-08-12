@@ -49,6 +49,10 @@
             </div>
         </div>
 
+        <div class="alert alert-danger" role="alert" ng-repeat="warning in home.status.Warnings">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;{{warning}}
+        </div>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 Profile
