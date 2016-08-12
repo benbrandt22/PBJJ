@@ -14,7 +14,8 @@ namespace PBJJ.Core
             
             return new PbjjConfigViewModel()
             {
-                KerfWidthInches = app.KerfWidthInches
+                KerfWidthInches = app.KerfWidthInches,
+                MaxWidthInches = app.MaxWidthInches
             };
         }
     }

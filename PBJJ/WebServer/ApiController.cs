@@ -29,6 +29,7 @@ namespace PBJJ.WebServer
         public IPostResponse SaveApplicationConfiguration([FromContent] PbjjConfigViewModel configViewModel)
         {
             ProgrammableBoxJointJigApp.Instance.KerfWidthInches = configViewModel.KerfWidthInches;
+            ProgrammableBoxJointJigApp.Instance.MaxWidthInches = configViewModel.MaxWidthInches;
 
             return new PostResponse(PostResponse.ResponseStatus.Created,"index.html");
         }

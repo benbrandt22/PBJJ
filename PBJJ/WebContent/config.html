@@ -29,10 +29,15 @@
                 Settings
             </div>
             <div class="panel-body">
-                
+
                 <div class="form-group">
                     <label for="kerfwidth">Kerf Width (inches)</label>
-                    <input id="kerfwidth" type="number" step="0.001" ng-model="configCtrl.config.KerfWidthInches" class="form-control" />
+                    <input id="kerfwidth" type="number" step="0.001" ng-model="configCtrl.config.KerfWidthInches" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="maxwidth">Maximum Width (inches)</label>
+                    <input id="maxwidth" type="number" step="0.001" ng-model="configCtrl.config.MaxWidthInches" class="form-control" />
                 </div>
 
                 <p>

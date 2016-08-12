@@ -15,10 +15,11 @@ namespace PBJJ.Core
 
         public Carriage Carriage;
         private double _kerfWidthInches;
+        private double _maxWidthInches;
         private LimitSwitch _onTableLimitSwitch;
         private LedLight RedLight;
         private LedLight GreenLight;
-
+        
         private ApplicationDataContainer LocalSettings { get; set; }
 
         public static ProgrammableBoxJointJigApp Instance {
@@ -45,6 +46,7 @@ namespace PBJJ.Core
             UsePrimaryProfile = true;
             
             this._kerfWidthInches = (double?) LocalSettings.Values["kerfWidthInches"] ?? 0.125d;
+            this._maxWidthInches = (double?)LocalSettings.Values["maxWidthInches"] ?? 8.0d;
 
             Task.Run(ShowReadyIndicator);
         }
@@ -76,6 +78,16 @@ namespace PBJJ.Core
             {
                 _kerfWidthInches = value;
                 LocalSettings.Values["kerfWidthInches"] = value;
+            }
+        }
+
+        public double MaxWidthInches
+        {
+            get { return _maxWidthInches; }
+            set
+            {
+                _maxWidthInches = value;
+                LocalSettings.Values["maxWidthInches"] = value;
             }
         }
 
