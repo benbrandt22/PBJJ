@@ -121,7 +121,8 @@ namespace PBJJ.Core
             RedLight.TurnOff();
 
             int cutCounter = 1;
-            foreach (var cutPosition in CutProgram.CutPositions)
+            var positions = CutProgram.CutPositions.Where(p => p <= MaxWidthInches).ToList();
+            foreach (var cutPosition in positions)
             {
                 while (OnTable) {
                     Status("Waiting: Pull back off the blade");
