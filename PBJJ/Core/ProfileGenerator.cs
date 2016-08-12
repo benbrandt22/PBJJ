@@ -25,6 +25,12 @@ namespace PBJJ.Core
                 currentWidth = (currentWidth + fingerWidthInches);
             } while (currentWidth < overallWidthInches);
 
+            if (profile.Elements.Any() && currentWidth > overallWidthInches)
+            {
+                // ensure the profile doesn't exceed the target width by shortening the last element
+                profile.Elements.Last().Width -= (currentWidth - overallWidthInches);
+            }
+
             return profile;
         }
     }
