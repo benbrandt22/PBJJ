@@ -21,6 +21,11 @@ namespace PBJJ.Core
         public List<JointProfileElement> ReverseElements {
             get { return Elements.Select(e => e.Reverse()).ToList(); }
         }
+
+        public double TotalWidth
+        {
+            get { return Elements.Sum(e => e.Width); }
+        }
     }
     
     public class JointProfileElement

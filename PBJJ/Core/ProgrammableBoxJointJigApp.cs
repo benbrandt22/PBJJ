@@ -184,7 +184,7 @@ namespace PBJJ.Core
                 warnings.Add("Certain elements of this cut profile are narrower than your blade kerf.");
             }
 
-            var totalProfileWidth = Profile.Elements.Sum(e => e.Width);
+            var totalProfileWidth = Profile.TotalWidth;
             if (totalProfileWidth > MaxWidthInches)
             {
                 warnings.Add($"The current profile is wider ({totalProfileWidth:N3} in) than the maximum width of the jig ({MaxWidthInches:N3} in)");
