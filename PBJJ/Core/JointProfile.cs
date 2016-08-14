@@ -22,7 +22,7 @@ namespace PBJJ.Core
             get { return Elements.Select(e => e.Reverse()).ToList(); }
         }
 
-        public double TotalWidth
+        public decimal TotalWidth
         {
             get { return Elements.Sum(e => e.Width); }
         }
@@ -30,13 +30,13 @@ namespace PBJJ.Core
     
     public class JointProfileElement
     {
-        public JointProfileElement(JointProfileElementType type, double width)
+        public JointProfileElement(JointProfileElementType type, decimal width)
         {
             this.Type = type;
             this.Width = width;
         }
 
-        public double Width { get; set; }
+        public decimal Width { get; set; }
 
         public JointProfileElementType Type { get; set; }
 

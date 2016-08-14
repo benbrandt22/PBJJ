@@ -11,7 +11,7 @@ namespace PBJJ.Core
         public bool ProgramRunning { get; set; }
         public bool OnTable { get; set; }
         public double CurrentPositionInches { get; set; }
-        public double KerfWidthInches { get; set; }
+        public decimal KerfWidthInches { get; set; }
         public bool UsePrimaryProfile { get; set; }
         public string ProfileName { get; set; }
         public List<JointProfileElement> ProfileElements { get; set; }

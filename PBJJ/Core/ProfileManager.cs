@@ -87,7 +87,7 @@ namespace PBJJ.Core
                     var type = firstChar.ToLower() == "f"
                         ? JointProfileElement.JointProfileElementType.Finger
                         : JointProfileElement.JointProfileElementType.Slot;
-                    var width = double.Parse(line.Substring(2));
+                    var width = decimal.Parse(line.Substring(2));
                     var jpe = new JointProfileElement(type, width);
                     elements.Add(jpe);
                 }

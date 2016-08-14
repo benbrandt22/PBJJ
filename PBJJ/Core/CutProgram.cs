@@ -8,18 +8,18 @@ namespace PBJJ.Core
 {
     public class CutProgram
     {
-        public CutProgram(List<JointProfileElement> elements, double kerfWidth)
+        public CutProgram(List<JointProfileElement> elements, decimal kerfWidth)
         {
             GenerateFromProfileElements(elements, kerfWidth);
         }
 
-        public List<double> CutPositions { get; set; }
+        public List<decimal> CutPositions { get; set; }
 
-        private void GenerateFromProfileElements(List<JointProfileElement> elements, double kerfWidth)
+        private void GenerateFromProfileElements(List<JointProfileElement> elements, decimal kerfWidth)
         {
             // work out the positions of each slot, and where they start and end
-            var slotStartsAndEnds = new List<Tuple<double,double>>();
-            double pos = 0;
+            var slotStartsAndEnds = new List<Tuple<decimal,decimal>>();
+            decimal pos = 0;
             foreach (var element in elements)
             {
                 if (element.Type == JointProfileElement.JointProfileElementType.Finger)
@@ -30,22 +30,22 @@ namespace PBJJ.Core
                 else
                 {
                     // slot...
-                    var slot = new Tuple<double, double>(pos, (pos + element.Width));
+                    var slot = new Tuple<decimal, decimal>(pos, (pos + element.Width));
                     slotStartsAndEnds.Add(slot);
                     pos = (pos + element.Width);
                 }
             }
 
             // now work out the cuts to make each slot
-            List<double> cuts = new List<double>();
+            var cuts = new List<decimal>();
             foreach (var slotCoord in slotStartsAndEnds)
             {
-                double slotCutPos = slotCoord.Item1 + kerfWidth;
+                decimal slotCutPos = slotCoord.Item1 + kerfWidth;
                 cuts.Add(slotCutPos);
                 while (slotCutPos < slotCoord.Item2)
                 {
                     // advance most of kerf
-                    slotCutPos += (0.9*kerfWidth);
+                    slotCutPos += (0.9M*kerfWidth);
                     // ensure we don't overshoot the end of the slot
                     slotCutPos = Math.Min(slotCutPos, slotCoord.Item2);
                     // add the cut

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Xaml;
 
@@ -14,8 +15,8 @@ namespace PBJJ.Core
         private static ProgrammableBoxJointJigApp instance;
 
         public Carriage Carriage;
-        private double _kerfWidthInches;
-        private double _maxWidthInches;
+        private decimal _kerfWidthInches;
+        private decimal _maxWidthInches;
         private LimitSwitch _onTableLimitSwitch;
         private LedLight RedLight;
         private LedLight GreenLight;
@@ -42,13 +43,34 @@ namespace PBJJ.Core
             GreenLight = new LedLight(GpioConnections.GreenLightGpioPin);
 
             LocalSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            Profile = ProfileGenerator.GenerateStandardProfile(0.25, 6);
+            Profile = ProfileGenerator.GenerateStandardProfile(0.25M, 6M);
             UsePrimaryProfile = true;
             
-            this._kerfWidthInches = (double?) LocalSettings.Values["kerfWidthInches"] ?? 0.125d;
-            this._maxWidthInches = (double?)LocalSettings.Values["maxWidthInches"] ?? 8.0d;
+            this._kerfWidthInches = LoadDecimalSetting("kerfWidthInches", 0.125M);
+            this._maxWidthInches = LoadDecimalSetting("maxWidthInches", 8.0M);
 
             Task.Run(ShowReadyIndicator);
+        }
+
+        private decimal LoadDecimalSetting(string settingName, decimal defaultValue)
+        {
+            // storing numeric settings as strings. Had trouble when switching types on stored settings,
+            // and system threw errors when attempting to store decimals. Opted to store settings as
+            // simple strings and let the code handle all necessary casting.
+            if (LocalSettings.Values[settingName] == null)
+            {
+                return defaultValue;
+            }
+            decimal parsedValue;
+            if (decimal.TryParse((string) LocalSettings.Values[settingName], out parsedValue))
+            {
+                // parsed successfully
+                return parsedValue;
+            }
+            else
+            {
+                return defaultValue;
+            }
         }
 
         private async Task ShowReadyIndicator() {
@@ -71,23 +93,23 @@ namespace PBJJ.Core
         public bool ProgramRunning { get; private set; }
         public bool OnTable => _onTableLimitSwitch.IsPressed();
 
-        public double KerfWidthInches
+        public decimal KerfWidthInches
         {
             get { return _kerfWidthInches; }
             set
             {
                 _kerfWidthInches = value;
-                LocalSettings.Values["kerfWidthInches"] = value;
+                LocalSettings.Values["kerfWidthInches"] = value.ToString();
             }
         }
 
-        public double MaxWidthInches
+        public decimal MaxWidthInches
         {
             get { return _maxWidthInches; }
             set
             {
                 _maxWidthInches = value;
-                LocalSettings.Values["maxWidthInches"] = value;
+                LocalSettings.Values["maxWidthInches"] = value.ToString();
             }
         }
 
@@ -117,7 +139,7 @@ namespace PBJJ.Core
             }
             Status("Moving to the Home position");
             RedLight.StartBlinking();
-            await Carriage.MoveToPosition(0);
+            await Carriage.MoveToPosition(0M);
             RedLight.TurnOff();
 
             int cutCounter = 1;
@@ -145,7 +167,7 @@ namespace PBJJ.Core
             }
             Status("Moving to the Home position");
             RedLight.StartBlinking();
-            await Carriage.MoveToPosition(0);
+            await Carriage.MoveToPosition(0M);
             RedLight.TurnOff();
 
             Status("");

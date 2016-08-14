@@ -2,7 +2,7 @@ namespace PBJJ.Core
 {
     public class PbjjConfigViewModel
     {
-        public double KerfWidthInches { get; set; }
-        public double MaxWidthInches { get; set; }
+        public decimal KerfWidthInches { get; set; }
+        public decimal MaxWidthInches { get; set; }
     }
 }

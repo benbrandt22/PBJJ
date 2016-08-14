@@ -34,6 +34,11 @@ namespace PBJJ.Core
 
         public double CurrentPositionInches => StepsToInches(_currentPositionSteps);
 
+        public async Task MoveToPosition(decimal inches)
+        {
+            await MoveToPosition(Convert.ToDouble(inches));
+        }
+
         public async Task MoveToPosition(double inches)
         {
             int targetStepPosition = InchesToSteps(inches);
