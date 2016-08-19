@@ -27,10 +27,10 @@
         <div ng-repeat="profile in profilesCtrl.profiles" class="well well-sm" style="cursor: pointer;" ng-click="profilesCtrl.profileClick($index)">
 
             <div class="row">
-                <div class="col-xs-1">
-                    <span class="glyphicon glyphicon-file"></span>
+                <div class="col-sm-1 hidden-xs">
+                    <div style="font-size: 3em"><span class="glyphicon glyphicon-file"></span></div>
                 </div>
-                <div class="col-xs-11">
+                <div class="col-sm-11 col-xs-12">
                     <div>
                         <span ng-if="!profile.isRenaming">
                             <strong>{{profile.name}}</strong>
