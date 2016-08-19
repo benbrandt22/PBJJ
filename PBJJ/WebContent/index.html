@@ -22,6 +22,11 @@
 
     <div class="container" ng-controller="HomeController as home">
 
+        <div class="alert alert-danger" role="alert" ng-if="home.offline">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;
+            Unable to update status, check WiFi connection and verify device is running.
+        </div>
+
         <div class="panel panel-info">
             <div class="panel-heading">
                 <span class="text-muted">Status:</span>

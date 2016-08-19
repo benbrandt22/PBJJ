@@ -4,14 +4,17 @@
     home.refreshIntervalMs = 500;
 
     home.updateStatus = function () {
-        $http.get("/api/status").then(
+        var config = { timeout: 5000 }; // throws error if response takes longer than this (milliseconods)
+        $http.get("/api/status", config).then(
             function (response) {
+                home.offline = false;
                 home.status = response.data;
                 home.boxes = home.getDrawingBoxes(home.status.ProfileElements);
                 $timeout(home.updateStatus, home.refreshIntervalMs);
             },
             function(error) {
                 console.log(error);
+                home.offline = true;
                 $timeout(home.updateStatus, home.refreshIntervalMs);
             });
     };
