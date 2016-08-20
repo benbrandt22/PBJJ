@@ -17,7 +17,7 @@ namespace PBJJ.Core
         public Carriage Carriage;
         private decimal _kerfWidthInches;
         private decimal _maxWidthInches;
-        private LimitSwitch _onTableLimitSwitch;
+        private NormallyClosedLimitSwitch _onTableLimitSwitch;
         private LedLight RedLight;
         private LedLight GreenLight;
         
@@ -38,7 +38,7 @@ namespace PBJJ.Core
         {
             // private constructor to ensure single instance in static "Instance" field
             Carriage = new Carriage();
-            _onTableLimitSwitch = new LimitSwitch(GpioConnections.OnTableLimitSwitchPin);
+            _onTableLimitSwitch = new NormallyClosedLimitSwitch(GpioConnections.OnTableLimitSwitchPin);
             RedLight = new LedLight(GpioConnections.RedLightGpioPin);
             GreenLight = new LedLight(GpioConnections.GreenLightGpioPin);
 

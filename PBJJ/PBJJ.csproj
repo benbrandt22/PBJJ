@@ -124,7 +124,7 @@
     </Compile>
     <Compile Include="Core\Carriage.cs" />
     <Compile Include="Core\LedLight.cs" />
-    <Compile Include="Core\LimitSwitch.cs" />
+    <Compile Include="Core\NormallyClosedLimitSwitch.cs" />
     <Compile Include="Core\CarriageStepperMotor.cs" />
     <Compile Include="Core\CutProgram.cs" />
     <Compile Include="Core\JointProfile.cs" />

@@ -12,13 +12,13 @@ namespace PBJJ.Core
         private double _stepsPerInch;
         private int _currentPositionSteps;
         private CarriageStepperMotor _motor;
-        private LimitSwitch _homeLimitSwitch;
+        private NormallyClosedLimitSwitch _homeLimitSwitch;
 
         public Carriage()
         {
             InitStepsPerInch();
             this._motor = new CarriageStepperMotor();
-            this._homeLimitSwitch = new LimitSwitch(GpioConnections.CarriageHomeLimitSwitchPin);
+            this._homeLimitSwitch = new NormallyClosedLimitSwitch(GpioConnections.CarriageHomeLimitSwitchPin);
         }
 
         private void InitStepsPerInch()

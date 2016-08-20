@@ -3,14 +3,14 @@
 namespace PBJJ.Core
 {
     /// <summary>
-    /// Represents a limit switch with the Normally Open contacts
-    /// connected to ground and the GOPIO input pin.
+    /// Represents a limit switch with the Normally Closed contacts
+    /// connected to ground and the GPIO input pin.
     /// </summary>
-    public class LimitSwitch
+    public class NormallyClosedLimitSwitch
     {
         private readonly GpioPin _inputPin;
 
-        public LimitSwitch(GpioPin inputPin)
+        public NormallyClosedLimitSwitch(GpioPin inputPin)
         {
             _inputPin = inputPin;
         }
@@ -18,7 +18,7 @@ namespace PBJJ.Core
         public bool IsPressed()
         {
             var pinValue = _inputPin.Read();
-            return pinValue == GpioPinValue.Low;
+            return pinValue == GpioPinValue.High;
         }
 
         public bool IsNotPressed()
