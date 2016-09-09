@@ -45,6 +45,7 @@
 
                 <div class="text-muted">
                     Position: {{home.status.CurrentPositionInches | number : 3}} in
+                    (Overall: {{home.getTotalWidth() | number : 3}} in)
                     <span class="pull-right">
                         {{home.status.OnTable ? 'On Table' : 'Off Table'}}
                     </span>
