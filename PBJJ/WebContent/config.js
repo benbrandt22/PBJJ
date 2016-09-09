@@ -26,9 +26,5 @@
             });
     };
 
-    configCtrl.cancel = function () {
-        $window.location.href = '/index.html';
-    };
-
     configCtrl.loadConfig();
 });
