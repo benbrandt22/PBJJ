@@ -43,14 +43,19 @@ namespace PBJJ.Core
             {
                 // easydriver steps for every low-to-high transition
                 GpioConnections.StepperStepPin.Write(GpioPinValue.Low);
+                ShortDelay(stepPeriodMilliseconds / 2);
                 GpioConnections.StepperStepPin.Write(GpioPinValue.High);
-
-                _sw.Start();
-                while ((_sw.Elapsed).TotalMilliseconds < stepPeriodMilliseconds) { }
-                _sw.Reset();
+                ShortDelay(stepPeriodMilliseconds / 2);
 
                 progress?.Report(directionMultiplier * (i + 1));
             }
+        }
+
+        private void ShortDelay(double milliseconds)
+        {
+            _sw.Start();
+            while ((_sw.Elapsed).TotalMilliseconds < milliseconds) { }
+            _sw.Reset();
         }
 
     }
