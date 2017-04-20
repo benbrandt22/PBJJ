@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using System.Text.RegularExpressions;
+using Windows.Data.Text;
 
 namespace PBJJ.Core
 {
@@ -55,25 +56,24 @@ namespace PBJJ.Core
         }
 
         public static async void CreateNewProfile(NewProfileViewModel newProfileViewModel) {
-            if (newProfileViewModel.Type == "Standard") {
-                var newProfile = ProfileGenerator.GenerateStandardProfile(newProfileViewModel.FingerWidth, newProfileViewModel.OverallWidth);
-                await SaveProfile(newProfile);
-                return;
+
+            JointProfile newProfile;
+
+            switch (newProfileViewModel.Type) {
+                case NewProfileType.Standard:
+                    newProfile = ProfileGenerator.GenerateStandardProfile(newProfileViewModel.FingerWidth, newProfileViewModel.OverallWidth);
+                    break;
+                case NewProfileType.FingerSlotCount:
+                    newProfile = ProfileGenerator.GenerateFingerSlotCountProfile(newProfileViewModel.FingerSlotCount, newProfileViewModel.OverallWidth);
+                    break;
+                case NewProfileType.Custom:
+                    newProfile = new JointProfile(newProfileViewModel.Name);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
-            if (newProfileViewModel.Type == "FingerSlotCount")
-            {
-                var newProfile = ProfileGenerator.GenerateFingerSlotCountProfile(newProfileViewModel.FingerSlotCount, newProfileViewModel.OverallWidth);
-                await SaveProfile(newProfile);
-                return;
-            }
-
-            if (newProfileViewModel.Type == "Custom") {
-                var newProfile = new JointProfile(newProfileViewModel.Name);
-                await SaveProfile(newProfile);
-                return;
-            }
-
+            await SaveProfile(newProfile);
         }
 
         private static async Task SaveProfile(JointProfile jointProfile) {
