@@ -49,7 +49,7 @@ namespace PBJJ.Core
             this._kerfWidthInches = LoadDecimalSetting("kerfWidthInches", 0.125M);
             this._maxWidthInches = LoadDecimalSetting("maxWidthInches", 8.0M);
 
-            Task.Run(ShowReadyIndicator);
+            ShowReadyIndicator();
         }
 
         private decimal LoadDecimalSetting(string settingName, decimal defaultValue)
@@ -73,10 +73,13 @@ namespace PBJJ.Core
             }
         }
 
-        private async Task ShowReadyIndicator() {
-            RedLight.StartBlinking();
-            GreenLight.StartBlinking();
-            await Task.Delay(3000);
+        private void ShowReadyIndicator() {
+            RedLight.TurnOn();
+            GreenLight.TurnOn();
+        }
+
+        private void LightsOff()
+        {
             RedLight.TurnOff();
             GreenLight.TurnOff();
         }
@@ -116,14 +119,17 @@ namespace PBJJ.Core
         public async Task ReHome()
         {
             Status("Returning to Home position...");
+            LightsOff();
             RedLight.StartBlinking();
             await Task.Run(Carriage.ReHome);
             RedLight.TurnOff();
             Status("");
+            ShowReadyIndicator();
         }
 
         public async Task RunProgram()
         {
+            LightsOff();
             ProgramRunning = true;
             CutProgram = new CutProgram(UsePrimaryProfile ? Profile.Elements : Profile.ReverseElements, KerfWidthInches);
             // make sure we're off the table
@@ -173,6 +179,7 @@ namespace PBJJ.Core
             Status("");
 
             ProgramRunning = false;
+            ShowReadyIndicator();
         }
 
         private async Task MakeTheCut()
