@@ -33,5 +33,24 @@ namespace PBJJ.Core
 
             return profile;
         }
+
+        public static JointProfile GenerateFingerSlotCountProfile(int fingerSlotCount, decimal overallWidthInches) {
+            string name = $"{fingerSlotCount} fingers over {overallWidthInches}in";
+
+            var profile = new JointProfile(name);
+
+            JointProfileElement.JointProfileElementType currentElementType = JointProfileElement.JointProfileElementType.Finger;
+
+            for (int positionNumber = 1; positionNumber <= fingerSlotCount; positionNumber++) {
+                decimal totalPreviousWidth = profile.TotalWidth;
+                decimal thisElementWidth = Math.Round( (positionNumber*(overallWidthInches/fingerSlotCount)) - totalPreviousWidth , 3);
+                profile.Elements.Add(new JointProfileElement(currentElementType, thisElementWidth));
+                currentElementType = currentElementType.Reverse();
+            }
+            
+            return profile;
+        }
+        
+
     }
 }

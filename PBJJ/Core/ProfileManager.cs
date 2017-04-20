@@ -60,11 +60,20 @@ namespace PBJJ.Core
                 await SaveProfile(newProfile);
                 return;
             }
+
+            if (newProfileViewModel.Type == "FingerSlotCount")
+            {
+                var newProfile = ProfileGenerator.GenerateFingerSlotCountProfile(newProfileViewModel.FingerSlotCount, newProfileViewModel.OverallWidth);
+                await SaveProfile(newProfile);
+                return;
+            }
+
             if (newProfileViewModel.Type == "Custom") {
                 var newProfile = new JointProfile(newProfileViewModel.Name);
                 await SaveProfile(newProfile);
                 return;
             }
+
         }
 
         private static async Task SaveProfile(JointProfile jointProfile) {

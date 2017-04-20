@@ -3,6 +3,7 @@ namespace PBJJ.Core {
         public string Type { get; set; }
         public string Name { get; set; }
         public decimal FingerWidth { get; set; }
+        public int FingerSlotCount { get; set; }
         public decimal OverallWidth { get; set; }
     }
 }

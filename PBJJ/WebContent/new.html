@@ -29,6 +29,7 @@
                 <label for="type">Type</label>
                 <select id="type" ng-model="newCtrl.type" class="form-control">
                     <option value="Standard">Standard</option>
+                    <option value="FingerSlotCount">Finger/Slot Count</option>
                     <option value="Custom">Custom</option>
                 </select>
             </div>
@@ -41,6 +42,20 @@
             <div class="form-group">
                 <label for="fingerwidth">Finger Width (inches)</label>
                 <input id="fingerwidth" type="number" step="0.001" ng-model="newCtrl.fingerWidth" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="overallwidth">Overall Width (inches)</label>
+                <input id="overallwidth" type="number" step="0.001" ng-model="newCtrl.overallWidth" class="form-control" />
+            </div>
+        </div>
+        
+        <div ng-if="newCtrl.type == 'FingerSlotCount'">
+            <p>
+                Standard box joints with a specified number of fingers and slots adjusted to fit within an overall width.
+            </p>
+            <div class="form-group">
+                <label for="fingerslotcount">Finger/Slot Count</label>
+                <input id="fingerslotcount" type="number" step="1" min="2" ng-model="newCtrl.fingerSlotCount" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="overallwidth">Overall Width (inches)</label>

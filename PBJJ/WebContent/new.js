@@ -12,6 +12,12 @@
             return (a && b);
         }
 
+        if (newCtrl.type === 'FingerSlotCount') {
+            var a = (newCtrl.fingerSlotCount >= 2);
+            var b = (newCtrl.overallWidth > 0);
+            return (a && b);
+        }
+
         if (newCtrl.type === 'Custom') {
             return (newCtrl.name.length > 0);
         }
@@ -27,6 +33,7 @@
             type: newCtrl.type,
             name: newCtrl.name,
             fingerWidth: newCtrl.fingerWidth,
+            fingerSlotCount: newCtrl.fingerSlotCount,
             overallWidth: newCtrl.overallWidth,
         };
         $http.post("/api/createNew", data).then(
