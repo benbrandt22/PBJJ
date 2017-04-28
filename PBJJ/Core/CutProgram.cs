@@ -18,7 +18,7 @@ namespace PBJJ.Core
         private void GenerateFromProfileElements(List<JointProfileElement> elements, decimal kerfWidth)
         {
             // work out the positions of each slot, and where they start and end
-            var slotStartsAndEnds = new List<Tuple<decimal,decimal>>();
+            var slotStartsAndEnds = new List<SlotCoordinate>();
             decimal pos = 0;
             foreach (var element in elements)
             {
@@ -30,7 +30,7 @@ namespace PBJJ.Core
                 else
                 {
                     // slot...
-                    var slot = new Tuple<decimal, decimal>(pos, (pos + element.Width));
+                    var slot = new SlotCoordinate(pos, (pos + element.Width));
                     slotStartsAndEnds.Add(slot);
                     pos = (pos + element.Width);
                 }
@@ -40,14 +40,14 @@ namespace PBJJ.Core
             var cuts = new List<decimal>();
             foreach (var slotCoord in slotStartsAndEnds)
             {
-                decimal slotCutPos = slotCoord.Item1 + kerfWidth;
+                decimal slotCutPos = slotCoord.Left + kerfWidth;
                 cuts.Add(slotCutPos);
-                while (slotCutPos < slotCoord.Item2)
+                while (slotCutPos < slotCoord.Right)
                 {
                     // advance most of kerf
                     slotCutPos += (0.9M*kerfWidth);
                     // ensure we don't overshoot the end of the slot
-                    slotCutPos = Math.Min(slotCutPos, slotCoord.Item2);
+                    slotCutPos = Math.Min(slotCutPos, slotCoord.Right);
                     // add the cut
                     cuts.Add(slotCutPos);
                 }
@@ -55,6 +55,16 @@ namespace PBJJ.Core
 
 
             CutPositions = cuts;
+        }
+
+        private class SlotCoordinate {
+            public SlotCoordinate(decimal left, decimal right)
+            {
+                Left = left;
+                Right = right;
+            }
+            public decimal Left { get; private set; }
+            public decimal Right { get; private set; }
         }
     }
 }
