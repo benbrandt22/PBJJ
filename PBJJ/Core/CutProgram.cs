@@ -60,11 +60,16 @@ namespace PBJJ.Core
         private class SlotCoordinate {
             public SlotCoordinate(decimal left, decimal right)
             {
+                if (left > right) {
+                    throw new ArgumentOutOfRangeException(nameof(left),
+                        "SlotCoordinate left value cannot be greater than right value");
+                }
                 Left = left;
                 Right = right;
             }
             public decimal Left { get; private set; }
             public decimal Right { get; private set; }
+            public decimal Width => (Right-Left);
         }
     }
 }
