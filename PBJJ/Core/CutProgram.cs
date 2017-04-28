@@ -11,44 +11,36 @@ namespace PBJJ.Core
     {
         public CutProgram(List<JointProfileElement> elements, decimal kerfWidth)
         {
-            GenerateFromProfileElements(elements, kerfWidth);
+            CutPositions = GenerateFromProfileElements(elements, kerfWidth);
         }
 
         public List<decimal> CutPositions { get; set; }
 
-        private void GenerateFromProfileElements(List<JointProfileElement> elements, decimal kerfWidth)
+        private static List<decimal> GenerateFromProfileElements(List<JointProfileElement> elements, decimal kerfWidth)
         {
             // work out the positions of each slot, and where they start and end
-            var slotStartsAndEnds = new List<SlotCoordinate>();
+            var slots = new List<SlotCoordinate>();
             decimal pos = 0;
             foreach (var element in elements)
             {
-                if (element.Type == JointProfileElement.JointProfileElementType.Finger)
-                {
-                    // ignore finger, advance to next
-                    pos = (pos + element.Width);
+                if (element.Type == JointProfileElement.JointProfileElementType.Slot) {
+                    slots.Add(new SlotCoordinate(pos, (pos + element.Width)));
                 }
-                else
-                {
-                    // slot...
-                    var slot = new SlotCoordinate(pos, (pos + element.Width));
-                    slotStartsAndEnds.Add(slot);
-                    pos = (pos + element.Width);
-                }
+                pos = (pos + element.Width);
             }
 
             // now work out the cuts to make each slot
             var cuts = new List<decimal>();
-            foreach (var slotCoord in slotStartsAndEnds)
+            foreach (var slotCoord in slots)
             {
                 var cutsForSlot = GetCutsForSlot(slotCoord, kerfWidth);
                 cuts.AddRange(cutsForSlot);
             }
             
-            CutPositions = cuts;
+            return cuts;
         }
 
-        private List<decimal> GetCutsForSlot(SlotCoordinate slot, decimal kerfWidth)
+        private static List<decimal> GetCutsForSlot(SlotCoordinate slot, decimal kerfWidth)
         {
             var cuts = new List<decimal>();
             if (slot.Width == 0) { return cuts; }
