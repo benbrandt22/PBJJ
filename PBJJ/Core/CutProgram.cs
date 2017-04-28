@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,21 +41,29 @@ namespace PBJJ.Core
             var cuts = new List<decimal>();
             foreach (var slotCoord in slotStartsAndEnds)
             {
-                decimal slotCutPos = slotCoord.Left + kerfWidth;
-                cuts.Add(slotCutPos);
-                while (slotCutPos < slotCoord.Right)
-                {
-                    // advance most of kerf
-                    slotCutPos += (0.9M*kerfWidth);
-                    // ensure we don't overshoot the end of the slot
-                    slotCutPos = Math.Min(slotCutPos, slotCoord.Right);
-                    // add the cut
-                    cuts.Add(slotCutPos);
-                }
+                var cutsForSlot = GetCutsForSlot(slotCoord, kerfWidth);
+                cuts.AddRange(cutsForSlot);
             }
-
-
+            
             CutPositions = cuts;
+        }
+
+        private List<decimal> GetCutsForSlot(SlotCoordinate slot, decimal kerfWidth)
+        {
+            var cuts = new List<decimal>();
+            if (slot.Width == 0) { return cuts; }
+            // first cut
+            cuts.Add(slot.Left + kerfWidth);
+            if (slot.Width <= kerfWidth) { return cuts; }
+            // slot requires multiple cuts, space them out evenly
+            decimal widthAfterFirstCut = (slot.Width - kerfWidth);
+            var maxAdvance = (kerfWidth*0.9M);
+            var remainingCutsRequired = (int)Math.Ceiling(widthAfterFirstCut/maxAdvance);
+            for (int i = 1; i <= remainingCutsRequired; i++) {
+                var cutPos = (slot.Left + kerfWidth) + (i*(widthAfterFirstCut/remainingCutsRequired));
+                cuts.Add(cutPos);
+            }
+            return cuts;
         }
 
         private class SlotCoordinate {
