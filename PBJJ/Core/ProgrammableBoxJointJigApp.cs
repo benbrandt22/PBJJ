@@ -118,6 +118,8 @@ namespace PBJJ.Core
 
         public async Task ReHome()
         {
+            if (ProgramRunning) { return; }
+
             Status("Returning to Home position...");
             LightsOff();
             RedLight.StartBlinking();
@@ -129,6 +131,8 @@ namespace PBJJ.Core
 
         public async Task RunProgram()
         {
+            if (ProgramRunning) { return; }
+
             LightsOff();
             ProgramRunning = true;
             CutProgram = new CutProgram(UsePrimaryProfile ? Profile.Elements : Profile.ReverseElements, KerfWidthInches);
