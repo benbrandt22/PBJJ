@@ -5,8 +5,8 @@ using Windows.Devices.Gpio;
 namespace PBJJ.Core
 {
     /// <summary>
-    /// Represents an LED (with inline resistor) with the positive lead connected
-    /// to positive voltage and connected to the output pin on the other end.
+    /// Represents an LED (with inline resistor, 220 ohm in my case) with the positive lead connected
+    /// to positive voltage (3.3v pin) and connected to the output pin on the other end.
     /// </summary>
     public class LedLight
     {
